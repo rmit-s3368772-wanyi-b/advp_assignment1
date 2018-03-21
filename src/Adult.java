@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Class to handle the requirements to create an Adult.
@@ -47,20 +48,21 @@ class Adult extends Person {
 			System.out.println(list.getKey());//Since Key is a copy of obj name
 				//Otherwise
 				//System.out.println(((Person) list.getValue()).getName());
-			}
+		}
    }
    //displaying the Name of Children 
    public void displayChildren () {
-	   
+	   for (Person a : children ) {
+		   System.out.println(a.getName());
+	   }
    }
    //displaying partner
    public String displayPartner() {
 	   return this.partner.getName();
    }
    //check if input is a friend 
-   public Adult isFriend(Person a) {
-	   
-       return this.friends.containsKey(a.getKey()) == true ? true : false;
+   public boolean isFriend(Adult a) {
+       return this.friends.containsKey(a.getName()) == true ? true : false;  
    }
 
 }
