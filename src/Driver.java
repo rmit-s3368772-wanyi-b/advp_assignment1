@@ -34,11 +34,11 @@ public class Driver {
 
          switch (select){
             case 1: // list everyone
-               //displayAll(profile);
+               displayAll();
                break;
 
             case 2: // select a profile
-               displayProfile();
+               //displayProfile();
                break;
 
             case 3:
@@ -82,10 +82,6 @@ public class Driver {
       }
    }
 
-   // 2. display a profile
-   public void displayProfile(){
-      System.out.println("");
-   }
 
    // 3. add a profile
    public void addAdult(String name, int age, String gender) {
@@ -108,7 +104,10 @@ public class Driver {
 
       Adult a = verifyMarriedList(parentname);
 
-      this.ppl.put(name, new Teen(name, age, gender, status, a, a.getPartner()));
+      Teen teen = new Teen(name, age, gender, status, a, a.getPartner());
+      this.ppl.put(name, teen);
+      a.setChild(teen);
+      a.getPartner().setChild(teen);
    }
 
    public void addInfant(String name, int age, String gender) {
@@ -121,7 +120,11 @@ public class Driver {
 
       Adult a = verifyMarriedList(parentname);
 
-      this.ppl.put(name, new Infant(name, age, gender, a, a.getPartner()));
+      Infant infant = new Infant(name, age, gender, a, a.getPartner());
+      this.ppl.put(name, infant);
+      a.setChild(infant);
+      a.getPartner().setChild(infant);
+
    }
 
    // display married people list
@@ -200,26 +203,21 @@ public class Driver {
         	 	
          }
    }
+         
+   // 5. Are they friends
+         
+   //6. Delete profile
+   public void deletePerson () {
+      Scanner sc2 = new Scanner (System.in);
+      System.out.println("Enter name of the person you want to delete: ");
+      String deleteName = sc2.nextLine();
 
-      // System.out.println("Please input new name: ");
-      // person.setName(input.next());
-      // System.out.println("Changes saved successfully.");
+      //remove person from the list
+      this.ppl.remove(deleteName);
+   }
          
-    // 5. Are they friends
-         
-    //6. Delete profile
- 	public void deletePerson () {
-		Scanner sc2 = new Scanner (System.in);
-		System.out.println("Enter name of the person you want to delete: ");
-		String deleteName = sc2.nextLine();
-		
-		//remove person from the list 
-    		this.ppl.remove(deleteName);
-    		
-    	}
-         
-    //7. Find parents/children
-         
-    // 8. QUIT!!!
+   //7. Find parents/children
+
+   // 8. QUIT!!!
          
 }
