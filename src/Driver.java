@@ -21,7 +21,7 @@ public class Driver {
 
          switch (select){
             case 1: // list everyone
-               displayAll(profile);
+               //displayAll(profile);
                break;
 
             case 2: // select a profile
