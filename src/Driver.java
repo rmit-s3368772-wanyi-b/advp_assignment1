@@ -173,6 +173,10 @@ public class Driver {
 
    // 4. update profile
    public void updateProfile(){
+	     Scanner input = new Scanner (System.in);
+	     System.out.println("Enter a name from the existing list please: ");
+	     String initialName = input.nextLine();
+	   
          System.out.println("\n********************************");
          // System.out.println("*" + getName() + "'s Profile  *");
          System.out.println("* 1. Update name               *");
@@ -182,6 +186,19 @@ public class Driver {
          System.out.println("* 5. Quit                      *");
          System.out.println("********************************");
          System.out.print("Enter an option: ");
+         
+      
+         System.out.println("Enter your choice please: ");
+         int choice = input.nextInt();
+         
+         switch(choice) {
+        	 	case 1 : 
+        	 		System.out.println("Enter your name: ");
+        	        String name = input.nextLine();
+        	       
+        	 		break;
+        	 	
+         }
    }
 
       // System.out.println("Please input new name: ");

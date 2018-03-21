@@ -6,7 +6,7 @@ import java.util.Map.Entry;
  * @author Wan Yi Beh
  */
 
-class Adult extends Person {
+class Adult extends Person implements Profile{
 
    // variables
    private String status;
@@ -33,6 +33,7 @@ class Adult extends Person {
    }
 
    // mutators
+   
    public void setStatus(String status)
    {
       this.status = status;
@@ -83,4 +84,43 @@ class Adult extends Person {
 
    }
 
+	@Override
+	public void displayProfile() {
+		// TODO Auto-generated method stub
+		System.out.println("Name: " + this.getName());
+		System.out.println("Age: " + this.getAge());
+		System.out.println("Gender: " + this.getGender());
+		System.out.println("Status: " + this.getStatus());
+		if (this.getPartner() != null) {
+			System.out.println("Partner: " + this.getPartner().getName());
+		}
+	}
+	
+	@Override
+	public void updateProfile() {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner (System.in);
+	     System.out.println("Enter a name from the existing list please: ");
+	     String initialName = input.nextLine();
+	   
+        System.out.println("\n********************************");
+        System.out.println("* 1. Update name               *");
+        System.out.println("* 2. Update age                *");
+        System.out.println("* 3. Update gender             *");
+        System.out.println("* 4. Update status             *");
+        System.out.println("* 5. Quit                      *");
+        System.out.println("********************************");
+        System.out.print("Enter an option: ");
+        
+     
+        System.out.println("Enter your choice please: ");
+        int choice = input.nextInt();
+        
+        switch(choice) {
+       	 	case 1 : 
+       	 		System.out.println("Enter your name: ");
+       	        String name = input.nextLine();
+       	        
+	}
+	
 }
