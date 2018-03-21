@@ -102,6 +102,10 @@ class Adult extends Person implements Profile{
 	@Override
 	public void displayProfile() {
 		// TODO Auto-generated method stub
+		Scanner input = new Scanner (System.in);
+		System.out.println("Enter the name of person : ");
+		String name = input.nextLine();
+		
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
 		System.out.println("Gender: " + this.getGender());
@@ -112,11 +116,19 @@ class Adult extends Person implements Profile{
 	}
 	
 	@Override
-	public void updateProfile() {
-		// TODO Auto-generated method stub
+	public void updateProfile(Map<String,Person> map) {
+	
 		Scanner input = new Scanner (System.in);
 	     System.out.println("Enter a name from the existing list please: ");
-	     String initialName = input.nextLine();
+	     String oldName = input.nextLine();
+	     
+	     if (map.get(oldName) != null) {
+	    	 	System.out.println(oldName + "found! ");
+	     }else
+	     {
+	    	  	System.out.println("Name not found! ");
+	    	  	return;
+	     }
 	   
         System.out.println("\n********************************");
         System.out.println("* 1. Update name               *");
@@ -133,9 +145,33 @@ class Adult extends Person implements Profile{
         
         switch(choice) {
        	 	case 1 : 
-       	 		System.out.println("Enter your name: ");
-       	        String name = input.nextLine();
-       	        
+       	 		System.out.println("Enter new name: ");
+       	        String newName = input.nextLine();
+       	        super.setName(newName);
+       	        System.out.println("Name updated successfully!!");
+       	        break;
+       	 	case 2 :
+       	 		System.out.println("Enter new age: ");
+       	        int newAge = input.nextInt();
+       	        super.setAge(newAge);
+       	        System.out.println("Age updated successfully!!");
+       	        break;
+       	 	case 3: 
+       	 		System.out.println("Enter new gender: ");
+       	        String newGender = input.nextLine();
+       	        super.setGender(newGender);
+       	        System.out.println("Gender updated successfully!!");
+       	        break;
+       	 	case 4: 
+       	 		System.out.println("Enter new status: ");
+       	        String newStatus = input.nextLine();
+       	        setStatus(newStatus);
+       	        System.out.println("Status updated successfully!!");
+       	 		break;   
+       	 	case 5:
+       	 		return;
+       	 	default: 
+       	 		System.out.println("Please input the right option");
+        }
 	}
-	
 }

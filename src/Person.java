@@ -51,28 +51,30 @@ public abstract class Person {
    {
       this.gender = gender;
    }
+   
+   
 
-   public void displayProfile(Map<String, Person> ppl){
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter name: ");
-      String name = input.nextLine();
-
-      Set set = ppl.entrySet();
-
-      // get an iterator
-      Iterator iterator = set.iterator();
-
-      // display list of details
-      System.out.println("=====LIST NAMES OF MARRIED PEOPLE====");
-      while (iterator.hasNext()) {
-         Map.Entry list = (Map.Entry) iterator.next();
-         if (input.equals( ((Person) list.getKey()) ) )
-         {
-            System.out.println("Name: " + list.getKey());
-            System.out.println("Age: " + ((Person) list.getValue()).getAge());
-            System.out.println("Gender: " + ((Person) list.getValue()).getGender());
-         }
-      }
-   }
+//   public void displayProfile(Map<String, Person> ppl){
+//      Scanner input = new Scanner(System.in);
+//      System.out.println("Enter name: ");
+//      String name = input.nextLine();
+//
+//      Set set = ppl.entrySet();
+//
+//      // get an iterator
+//      Iterator iterator = set.iterator();
+//
+//      // display list of details
+//      System.out.println("=====LIST NAMES OF MARRIED PEOPLE====");
+//      while (iterator.hasNext()) {
+//         Map.Entry list = (Map.Entry) iterator.next();
+//         if (input.equals( ((Person) list.getKey()) ) )
+//         {
+//            System.out.println("Name: " + list.getKey());
+//            System.out.println("Age: " + ((Person) list.getValue()).getAge());
+//            System.out.println("Gender: " + ((Person) list.getValue()).getGender());
+//         }
+//      }
+//   }
 
 }
