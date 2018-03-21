@@ -1,39 +1,32 @@
 /**
- * Class to handle the requirements to create a Child.
- * @author Wan Yi Beh
+ * 
+ * @author huanineupane
  */
 
 class Teen extends Person {
 
-   // variables
-   private Adult father;
-   private Adult mother;
+	private HashMap friends;
+	private String status;
+	
+	//constructor 
+	public Teen (String name, int age, String gender, String status) {
+		super(name, age, gender);
+		this.status = status;
+		
+	}
+	//accessor 
+	public String getStatus() {
+		return status;
+	}
+	public String getFriends() {
+		return friends;
+	}
+	//mutator
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public void setFriends(String friends) {
+		this.friends = friends;
+	}
 
-   // constructors
-   public Teen(String name, int age, String gender) {
-      super(name, age, gender);
-      addParents(father, mother);
-
-      if (age >= 16) {
-         throw new IllegalArgumentException("Please enter within range.");
-      }
-   }
-
-   // get variables
-   public Adult getFather() {
-      return father;
-   }
-
-   public Adult getMother() {
-      return mother;
-   }
-
-   // set variables
-
-
-   // add variables
-   private void addParents(Adult father, Adult mother) {
-      this.father = father;
-      this.mother = mother;
-   }
 }

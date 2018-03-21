@@ -10,9 +10,9 @@ class Adult extends Person {
    private String status;
    private Adult partner;
    private Map<String, Adult> friends;
-   private Infant arrInfant[] = new Infant [5];
-   private Teen arrTeen[] = new Teen [5];
+   private Person children[] = new Person [20];
 
+   //constructor
    public Adult(String _name, int _age, String _gender, String _status) {
       super(_name, _age, _gender);
       this.status = _status;
@@ -37,6 +37,7 @@ class Adult extends Person {
 
    // display friend list
    public void displayFriendList () {
+<<<<<<< HEAD
 	     // get set of the entries
          Set set = this.friends.entrySet();
 
@@ -51,11 +52,33 @@ class Adult extends Person {
              //Otherwise
              //System.out.println(((Person) list.getValue()).getName());
          }
+=======
+	   	// get set of the entries
+		Set set = this.friends.entrySet();
+		// get an iterator
+		Iterator iterator = set.iterator();
+			// display the list
+		System.out.println("=====LIST NAMES OF FRIENDS====");
+		while (iterator.hasNext()) {
+			Map.Entry list = (Map.Entry) iterator.next();
+			System.out.println(list.getKey());//Since Key is a copy of obj name
+				//Otherwise
+				//System.out.println(((Person) list.getValue()).getName());
+			}
+>>>>>>> 989263a953be248c9621cafd0570874215515aae
    }
-   
-   
-   public void isFriend(Person a) {
-      // return this.friends.containKey(a.getName()) == true ? true : false;
+   //displaying the Name of Children 
+   public void displayChildren () {
+	   
+   }
+   //displaying partner
+   public String displayPartner() {
+	   return this.partner.getName();
+   }
+   //check if input is a friend 
+   public Adult isFriend(Person a) {
+	   
+       return this.friends.containsKey(a.getKey()) == true ? true : false;
    }
 
 }
