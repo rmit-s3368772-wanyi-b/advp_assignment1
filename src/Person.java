@@ -18,28 +18,34 @@ public abstract class Person {
    }
 
    // accessors
-   public String getName() {
+   public String getName()
+   {
       return name;
    }
 
-   public int getAge() {
+   public int getAge()
+   {
       return age;
    }
 
-   public String getGender() {
+   public String getGender()
+   {
       return gender;
    }
 
    // mutators
-   public void setName(String name) {
+   public void setName(String name)
+   {
       this.name = name;
    }
 
-   public void setAge(int age) {
+   public void setAge(int age)
+   {
       this.age = age;
    }
 
-   public void setGender(String gender) {
+   public void setGender(String gender)
+   {
       this.gender = gender;
    }
 
