@@ -15,7 +15,7 @@ public class Driver {
     }
  
     public void initialiseObj (Map<String, Person> _ppl) {
-    		_ppl.put("Alice", new Adult("Alice", 27, "F", "work in KFC"));
+        _ppl.put("Alice", new Adult("Alice", 27, "F", "work in KFC"));
 		_ppl.put("Bob", new Adult("Bob", 28, "M","CEO"));
 //		_ppl.put("Fiona", new Teen("Fiona", 12, "student"));
 //		_ppl.put("Gigi", new Teen("Gigi", 10, "student"));
@@ -23,7 +23,7 @@ public class Driver {
     }
 	 
 	int select;
-	 Scanner input = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
 
 
    public void runNet(){

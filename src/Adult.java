@@ -6,6 +6,7 @@ import java.util.*;
  */
 
 class Adult extends Person {
+
    private String status;
    private Adult partner;
    private Map<String, Adult> friends;
@@ -34,22 +35,22 @@ class Adult extends Person {
 	   this.partner = partner;
    }
 
-   //display friend list 
+   // display friend list
    public void displayFriendList () {
-	// get set of the entries
-			Set set = this.friends.entrySet();
+	     // get set of the entries
+         Set set = this.friends.entrySet();
 
-			// get an iterator
-			Iterator iterator = set.iterator();
+         // get an iterator
+         Iterator iterator = set.iterator();
 
-			// display the list
-			System.out.println("=====LIST NAMES OF FRIENDS====");
-			while (iterator.hasNext()) {
-				Map.Entry list = (Map.Entry) iterator.next();
-				System.out.println(list.getKey());//Since Key is a copy of obj name
-				//Otherwise
-				//System.out.println(((Person) list.getValue()).getName());
-			}
+         // display the list
+         System.out.println("=====LIST NAMES OF FRIENDS====");
+         while (iterator.hasNext()) {
+             Map.Entry list = (Map.Entry) iterator.next();
+             System.out.println(list.getKey());//Since Key is a copy of obj name
+             //Otherwise
+             //System.out.println(((Person) list.getValue()).getName());
+         }
    }
    
    
