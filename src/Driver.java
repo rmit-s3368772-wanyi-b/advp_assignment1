@@ -182,6 +182,7 @@ public class Driver {
          System.out.println("* 5. Quit                      *");
          System.out.println("********************************");
          System.out.print("Enter an option: ");
+   }
 
       // System.out.println("Please input new name: ");
       // person.setName(input.next());
@@ -190,10 +191,18 @@ public class Driver {
     // 5. Are they friends
          
     //6. Delete profile
+ 	public void deletePerson () {
+		Scanner sc2 = new Scanner (System.in);
+		System.out.println("Enter name of the person you want to delete: ");
+		String deleteName = sc2.nextLine();
+		
+		//remove person from the list 
+    		this.ppl.remove(deleteName);
+    		
+    	}
          
     //7. Find parents/children
          
     // 8. QUIT!!!
          
-   }
 }
