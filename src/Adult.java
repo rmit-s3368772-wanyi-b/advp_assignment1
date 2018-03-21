@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Class to handle the requirements to create an Adult.
  * @author Wan Yi Beh
@@ -6,38 +8,51 @@
 class Adult extends Person {
    private String status;
    private Adult partner;
+   private Map<String, Adult> friends;
+   private Infant arrInfant[] = new Infant [5];
+   private Teen arrTeen[] = new Teen [5];
 
-   public Adult(String name, int age, String gender, String status) {
-      super(name, age, gender);
-      this.status = status;
+   public Adult(String _name, int _age, String _gender, String _status) {
+      super(_name, _age, _gender);
+      this.status = _status;
    }
-
-   // get variables
+   
+   // accessor
    public String getStatus() {
-      return status;
+      return this.status;
    }
 
    public Adult getPartner() {
-      return partner;
+      return this.partner;
    }
 
-   // set variables
+   // mutators
    public void setStatus(String status) {
       this.status = status;
    }
-
-   //add
-
-   // display
-   public void displayAdult() {
-      System.out.println("\n********************************");
-      System.out.print("Name: " + getName() + "\n");
-      System.out.print("Age: " + getAge() + "\n");
-      System.out.print("Gender: " + getGender() + "\n");
-      System.out.print("Status: " + getStatus() + "\n");
-      System.out.println("********************************\n");
+   public void setPartner (Adult partner) {
+	   this.partner = partner;
    }
 
+   //display friend list 
+   public void displayFriendList () {
+	// get set of the entries
+			Set set = this.friends.entrySet();
+
+			// get an iterator
+			Iterator iterator = set.iterator();
+
+			// display the list
+			System.out.println("=====LIST NAMES OF FRIENDS====");
+			while (iterator.hasNext()) {
+				Map.Entry list = (Map.Entry) iterator.next();
+				System.out.println(list.getKey());//Since Key is a copy of obj name
+				//Otherwise
+				//System.out.println(((Person) list.getValue()).getName());
+			}
+   }
+   
+   
    public void isFriend(Person a) {
       // return this.friends.containKey(a.getName()) == true ? true : false;
    }
