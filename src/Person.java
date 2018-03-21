@@ -11,13 +11,13 @@ public abstract class Person {
    private String gender;
 
    // constructors
-   public Person(String name, int age, String gender) {
-      this.name = name;
-      this.age = age;
-      this.gender = gender;
+   public Person(String _name, int _age, String _gender) {
+      this.name = _name;
+      this.age = _age;
+      this.gender = _gender;
    }
 
-   // get variables
+   // accessors
    public String getName() {
       return name;
    }
@@ -30,7 +30,7 @@ public abstract class Person {
       return gender;
    }
 
-   // set variables
+   // mutators
    public void setName(String name) {
       this.name = name;
    }

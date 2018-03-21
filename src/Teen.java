@@ -3,14 +3,14 @@
  * @author Wan Yi Beh
  */
 
-class Child extends Person {
+class Teen extends Person {
 
    // variables
    private Adult father;
    private Adult mother;
 
    // constructors
-   public Child(String name, int age, String gender) {
+   public Teen(String name, int age, String gender) {
       super(name, age, gender);
       addParents(father, mother);
 
