@@ -12,7 +12,7 @@ class Adult extends Person {
    private String status;
    private Adult partner;
    private Map<String, Adult> friends;
-   private Person children[] = new Person [20];
+   private Map<String, Person> children;
 
    // constructor
    public Adult(String _name, int _age, String _gender, String _status)
@@ -32,6 +32,7 @@ class Adult extends Person {
       return this.partner;
    }
 
+
    // mutators
    public void setStatus(String status)
    {
@@ -43,13 +44,28 @@ class Adult extends Person {
       this.partner = partner;
    }
 
+   public void setChild (Person a)
+   {
+      this.children.put(a.getName(),a );
+   }
 
    //displaying the Name of Children 
    public void displayChildren () {
-	   for (Person a : children ) {
-		   System.out.println(a.getName());
-	   }
+
+      // get set of the entries
+      Set set = this.children.entrySet();
+
+      // get an iterator
+      Iterator iterator = set.iterator();
+
+      // display the list
+      System.out.println("=====LIST NAMES OF FRIENDS====");
+      while (iterator.hasNext()) {
+         Map.Entry list = (Map.Entry) iterator.next();
+         System.out.println(list.getKey());//Since Key is a copy of obj name
+      }
    }
+
    // display friend list
    public void displayFriendList ()
    {
@@ -61,11 +77,10 @@ class Adult extends Person {
 
       // display the list
       System.out.println("=====LIST NAMES OF FRIENDS====");
+      byte count = 0;
       while (iterator.hasNext()) {
           Map.Entry list = (Map.Entry) iterator.next();
-          System.out.println(list.getKey());//Since Key is a copy of obj name
-
-          // System.out.println(((Person) list.getValue()).getName());
+         System.out.println(count + ". " + list.getKey());
       }
    }
 
