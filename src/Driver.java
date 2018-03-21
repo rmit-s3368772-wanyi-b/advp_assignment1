@@ -66,7 +66,20 @@ public class Driver {
 
    // 1. list all people
    public void displayAll() {
-	   
+      // get set of the entries
+      Set set = this.ppl.entrySet();
+
+      // get an iterator
+      Iterator iterator = set.iterator();
+
+      // display the list
+      System.out.println("=====LIST NAMES OF FRIENDS====");
+      byte count = 0;
+      while (iterator.hasNext()) {
+         count++;
+         Map.Entry list = (Map.Entry) iterator.next();
+         System.out.println(count + ". " + list.getKey());//Since Key is a copy of obj name
+      }
    }
 
    // 2. display a profile
@@ -75,8 +88,87 @@ public class Driver {
    }
 
    // 3. add a profile
-   public void addPerson() {
-	   
+   public void addAdult(String name, int age, String gender) {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter status: ");
+      String status = input.nextLine();
+      ppl.put(name, new Adult(name, age, gender, status));
+   }
+
+   public void addTeen(String name, int age, String gender) {
+      Scanner input = new Scanner(System.in);
+
+      System.out.println("Enter status:  ");
+      String status = input.nextLine();
+
+      displayMarriedPeople();
+
+      System.out.println("Enter name of one of your parents:  ");
+      String parentname = input.nextLine();
+
+      Adult a = verifyMarriedList(parentname);
+
+      this.ppl.put(name, new Teen(name, age, gender, status, a, a.getPartner()));
+   }
+
+   public void addInfant(String name, int age, String gender) {
+      Scanner input = new Scanner(System.in);
+
+      displayMarriedPeople();
+
+      System.out.println("Enter name of one of your parents:  ");
+      String parentname = input.nextLine();
+
+      Adult a = verifyMarriedList(parentname);
+
+      this.ppl.put(name, new Infant(name, age, gender, a, a.getPartner()));
+   }
+
+   // display married people list
+   public void displayMarriedPeople(){
+
+      Set set = this.ppl.entrySet();
+
+      // get an iterator
+      Iterator iterator = set.iterator();
+
+      // display the list of married adult people
+      System.out.println("=====LIST NAMES OF MARRIED PEOPLE====");
+      byte count = 0;
+      while (iterator.hasNext()) {
+         count++;
+         Map.Entry list = (Map.Entry) iterator.next();
+         if ( (((Person) list.getValue()) instanceof Adult) )
+         {
+            if (((Adult) list.getValue()).getPartner() != null){
+               System.out.println(count + ". " + list.getKey());
+            }
+         }
+      }
+   }
+
+   // verify marriage people name input
+   public Adult verifyMarriedList(String input) {
+
+      Set set = this.ppl.entrySet();
+
+      // get an iterator
+      Iterator iterator = set.iterator();
+
+      // display the list of married adult people
+      byte count = 0;
+      while (iterator.hasNext()) {
+         count++;
+         Map.Entry list = (Map.Entry) iterator.next();
+         if ((((Person) list.getValue()) instanceof Adult)) {
+            if (((Adult) list.getValue()).getPartner() != null) {
+               if (input.equals(((Adult) list.getValue()).getName())) {
+                  return ((Adult) list.getValue());
+               }
+            }
+         }
+      }
+      return null;
    }
 
    // 4. update profile
