@@ -3,221 +3,194 @@ import java.util.*;
 /**
  *
  * @author Wan Yi Beh
- *  */
-
+ */
 
 public class Driver {
 
+	Person person;
 	Map<String, Person> ppl = new HashMap<>();
 
-    public Driver (Map<String, Person> _ppl) {
-	   this.ppl = _ppl;
-    }
- 
-    public void initialiseObj (Map<String, Person> _ppl) {
-        _ppl.put("Alice", new Adult("Alice", 27, "F", "work in KFC"));
-		_ppl.put("Bob", new Adult("Bob", 28, "M","CEO"));
-//		_ppl.put("Fiona", new Teen("Fiona", 12, "student"));
-//		_ppl.put("Gigi", new Teen("Gigi", 10, "student"));
-//		_ppl.put("Ivan", new Teen("Ivan", 2));
-    }
-	 
+	public Driver(Map<String, Person> _ppl) {
+		this.ppl = _ppl;
+	}
+
+	public void initialiseObj(Map<String, Person> _ppl) {
+		_ppl.put("Alice", new Adult("Alice", 27, "F", "work in KFC"));
+		_ppl.put("Bob", new Adult("Bob", 28, "M", "CEO"));
+		// _ppl.put("Fiona", new Teen("Fiona", 12, "student"));
+		// _ppl.put("Gigi", new Teen("Gigi", 10, "student"));
+		// _ppl.put("Ivan", new Teen("Ivan", 2));
+	}
+
 	int select;
-    Scanner input = new Scanner(System.in);
+	Scanner input = new Scanner(System.in);
 
+	public void runNet() {
+		do {
 
-   public void runNet(){
-      do {
+			displayMenu();
+			select = input.nextInt();
 
-         displayMenu();
-         select = input.nextInt();
+			switch (select) {
+			case 1: // list everyone
+				displayAll();
+				break;
+			case 2: // select a profile
+				ppl.selectPerson().displayProfile();
+				break;
 
-         switch (select){
-            case 1: // list everyone
-               displayAll();
-               break;
+			case 3:
+				// displayAll();
+			}
+		} while (select != 4);
+	}
 
-            case 2: // select a profile
-               //displayProfile();
-               break;
+	public Person selectPerson() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter name: ");
+		//return this.ppl.get(input.nextLine());
+		Person choice = this.get.ppl.get(input.nextLine());
+		 return choice;
+	}
 
-            case 3:
-               //displayAll();
-         }
-      } while (select !=4);
-   }
+	// 0 main menu
+	private void displayMenu() {
+		System.out.println("\n********************************");
+		System.out.println("* ======== MiniNet Menu =======  *");
+		System.out.println("* 1. List everyone               *");
+		System.out.println("* 2. Select a profile            *");
+		System.out.println("* 3. Add a profile               *");
+		System.out.println("* 4. Update a profile            *");
+		System.out.println("* 5. Are they friends?           *");
+		System.out.println("* 6. Delete profile              *");
+		System.out.println("* 7. Find their parents/children *");
+		System.out.println("* 8. Quit                        *");
+		System.out.println("**********************************");
+		System.out.print("Enter an option: ");
+	}
 
+	// 1. list all people
+	public void displayAll() {
+		// get set of the entries
+		Set set = this.ppl.entrySet();
 
-   // 0 main menu
-   private void displayMenu(){
-      System.out.println("\n********************************");
-      System.out.println("* ======== MiniNet Menu =======  *");
-      System.out.println("* 1. List everyone               *");
-      System.out.println("* 2. Select a profile            *");
-      System.out.println("* 3. Add a profile               *");
-      System.out.println("* 4. Update a profile            *");
-      System.out.println("* 5. Are they friends?           *");
-      System.out.println("* 6. Delete profile              *");
-      System.out.println("* 7. Find their parents/children *");
-      System.out.println("* 8. Quit                        *");
-      System.out.println("**********************************");
-      System.out.print("Enter an option: ");
-   }
+		// get an iterator
+		Iterator iterator = set.iterator();
 
-   // 1. list all people
-   public void displayAll() {
-      // get set of the entries
-      Set set = this.ppl.entrySet();
+		// display the list
+		System.out.println("=====LIST NAMES OF FRIENDS====");
+		byte count = 0;
+		while (iterator.hasNext()) {
+			count++;
+			Map.Entry list = (Map.Entry) iterator.next();
+			System.out.println(count + ". " + list.getKey());// Since Key is a copy of obj name
+		}
+	}
 
-      // get an iterator
-      Iterator iterator = set.iterator();
+	// 3. add a profile
+	public void addAdult(String name, int age, String gender) {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter status: ");
+		String status = input.nextLine();
+		ppl.put(name, new Adult(name, age, gender, status));
+	}
 
-      // display the list
-      System.out.println("=====LIST NAMES OF FRIENDS====");
-      byte count = 0;
-      while (iterator.hasNext()) {
-         count++;
-         Map.Entry list = (Map.Entry) iterator.next();
-         System.out.println(count + ". " + list.getKey());//Since Key is a copy of obj name
-      }
-   }
+	public void addTeen(String name, int age, String gender) {
+		Scanner input = new Scanner(System.in);
 
+		System.out.println("Enter status:  ");
+		String status = input.nextLine();
 
-   // 3. add a profile
-   public void addAdult(String name, int age, String gender) {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter status: ");
-      String status = input.nextLine();
-      ppl.put(name, new Adult(name, age, gender, status));
-   }
+		displayMarriedPeople();
 
-   public void addTeen(String name, int age, String gender) {
-      Scanner input = new Scanner(System.in);
+		System.out.println("Enter name of one of your parents:  ");
+		String parentname = input.nextLine();
 
-      System.out.println("Enter status:  ");
-      String status = input.nextLine();
+		Adult a = verifyMarriedList(parentname);
 
-      displayMarriedPeople();
+		Teen teen = new Teen(name, age, gender, status, a, a.getPartner());
+		this.ppl.put(name, teen);
+		a.setChild(teen);
+		a.getPartner().setChild(teen);
+	}
 
-      System.out.println("Enter name of one of your parents:  ");
-      String parentname = input.nextLine();
+	public void addInfant(String name, int age, String gender) {
+		Scanner input = new Scanner(System.in);
 
-      Adult a = verifyMarriedList(parentname);
+		displayMarriedPeople();
 
-      Teen teen = new Teen(name, age, gender, status, a, a.getPartner());
-      this.ppl.put(name, teen);
-      a.setChild(teen);
-      a.getPartner().setChild(teen);
-   }
+		System.out.println("Enter name of one of your parents:  ");
+		String parentname = input.nextLine();
 
-   public void addInfant(String name, int age, String gender) {
-      Scanner input = new Scanner(System.in);
+		Adult a = verifyMarriedList(parentname);
 
-      displayMarriedPeople();
+		Infant infant = new Infant(name, age, gender, a, a.getPartner());
+		this.ppl.put(name, infant);
+		a.setChild(infant);
+		a.getPartner().setChild(infant);
 
-      System.out.println("Enter name of one of your parents:  ");
-      String parentname = input.nextLine();
+	}
 
-      Adult a = verifyMarriedList(parentname);
+	// display married people list
+	public void displayMarriedPeople() {
 
-      Infant infant = new Infant(name, age, gender, a, a.getPartner());
-      this.ppl.put(name, infant);
-      a.setChild(infant);
-      a.getPartner().setChild(infant);
+		Set set = this.ppl.entrySet();
 
-   }
+		// get an iterator
+		Iterator iterator = set.iterator();
 
-   // display married people list
-   public void displayMarriedPeople(){
+		// display the list of married adult people
+		System.out.println("=====LIST NAMES OF MARRIED PEOPLE====");
+		byte count = 0;
+		while (iterator.hasNext()) {
+			count++;
+			Map.Entry list = (Map.Entry) iterator.next();
+			if ((((Person) list.getValue()) instanceof Adult)) {
+				if (((Adult) list.getValue()).getPartner() != null) {
+					System.out.println(count + ". " + list.getKey());
+				}
+			}
+		}
+	}
 
-      Set set = this.ppl.entrySet();
+	// verify marriage people name input
+	public Adult verifyMarriedList(String input) {
 
-      // get an iterator
-      Iterator iterator = set.iterator();
+		Set set = this.ppl.entrySet();
 
-      // display the list of married adult people
-      System.out.println("=====LIST NAMES OF MARRIED PEOPLE====");
-      byte count = 0;
-      while (iterator.hasNext()) {
-         count++;
-         Map.Entry list = (Map.Entry) iterator.next();
-         if ( (((Person) list.getValue()) instanceof Adult) )
-         {
-            if (((Adult) list.getValue()).getPartner() != null){
-               System.out.println(count + ". " + list.getKey());
-            }
-         }
-      }
-   }
+		// get an iterator
+		Iterator iterator = set.iterator();
 
-   // verify marriage people name input
-   public Adult verifyMarriedList(String input) {
+		// display the list of married adult people
+		byte count = 0;
+		while (iterator.hasNext()) {
+			count++;
+			Map.Entry list = (Map.Entry) iterator.next();
+			if ((((Person) list.getValue()) instanceof Adult)) {
+				if (((Adult) list.getValue()).getPartner() != null) {
+					if (input.equals(((Adult) list.getValue()).getName())) {
+						return ((Adult) list.getValue());
+					}
+				}
+			}
+		}
+		return null;
+	}
 
-      Set set = this.ppl.entrySet();
+	// 5. Are they friends
+	
+	public void checkFriendship() {
+		
+	}
 
-      // get an iterator
-      Iterator iterator = set.iterator();
+	// 6. Delete profile
+	public void deletePerson() {
+		// remove person from the list
+		this.ppl.remove(person.getName());
+	}
 
-      // display the list of married adult people
-      byte count = 0;
-      while (iterator.hasNext()) {
-         count++;
-         Map.Entry list = (Map.Entry) iterator.next();
-         if ((((Person) list.getValue()) instanceof Adult)) {
-            if (((Adult) list.getValue()).getPartner() != null) {
-               if (input.equals(((Adult) list.getValue()).getName())) {
-                  return ((Adult) list.getValue());
-               }
-            }
-         }
-      }
-      return null;
-   }
+	// 7. Find parents/children
 
-   // 4. update profile
-   public void updateProfile(){
-	     Scanner input = new Scanner (System.in);
-	     System.out.println("Enter a name from the existing list please: ");
-	     String initialName = input.nextLine();
-	   
-         System.out.println("\n********************************");
-         // System.out.println("*" + getName() + "'s Profile  *");
-         System.out.println("* 1. Update name               *");
-         System.out.println("* 2. Update age                *");
-         System.out.println("* 3. Update gender             *");
-         System.out.println("* 4. Update status             *");
-         System.out.println("* 5. Quit                      *");
-         System.out.println("********************************");
-         System.out.print("Enter an option: ");
-         
-      
-         System.out.println("Enter your choice please: ");
-         int choice = input.nextInt();
-         
-         switch(choice) {
-        	 	case 1 : 
-        	 		System.out.println("Enter your name: ");
-        	        String name = input.nextLine();
-        	       
-        	 		break;
-        	 	
-         }
-   }
-         
-   // 5. Are they friends
-         
-   //6. Delete profile
-   public void deletePerson () {
-      Scanner sc2 = new Scanner (System.in);
-      System.out.println("Enter name of the person you want to delete: ");
-      String deleteName = sc2.nextLine();
+	// 8. QUIT!!!
 
-      //remove person from the list
-      this.ppl.remove(deleteName);
-   }
-         
-   //7. Find parents/children
-
-   // 8. QUIT!!!
-         
 }

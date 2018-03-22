@@ -27,7 +27,6 @@ class Infant extends Person {
 		return this.parents.get("mother");
 	}
 
-	// mutator
 
 	// display parents list
 	public void displayParents() {
@@ -53,6 +52,70 @@ class Infant extends Person {
 				System.out.println("Mother: " + ((Person) list.getValue()).getName());
 			}
 		}
+	}
+
+
+	public void displayProfile() {
+		// TODO Auto-generated method stub
+		System.out.println("Name: " + this.getName());
+		System.out.println("Age: " + this.getAge());
+		System.out.println("Gender: " + this.getGender());
+		System.out.println("Father: " + this.getFather().getName());
+		System.out.println("Mother: " + this.getMother().getName());	
+	}
+
+
+	public void updateProfile(Map<String,Person> map) {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner (System.in);
+	     System.out.println("Enter a name from the existing list please: ");
+	     String oldName = input.nextLine();
+	     
+	     if (map.get(oldName) != null) {
+	    	 	System.out.println(oldName + "found! ");
+	     }else
+	     {
+	    	  	System.out.println("Name not found! ");
+	    	  	return;
+	     }
+	   
+       System.out.println("\n********************************");
+       System.out.println("* 1. Update name               *");
+       System.out.println("* 2. Update age                *");
+       System.out.println("* 3. Update gender             *");
+       System.out.println("* 4. Quit                      *");
+       System.out.println("********************************");
+       System.out.print("Enter an option: ");
+       
+    
+       System.out.println("Enter your choice please: ");
+       int choice = input.nextInt();
+       
+       switch(choice) {
+      	 	case 1 : 
+      	 		System.out.println("Enter new name: ");
+      	        String newName = input.nextLine();
+      	        super.setName(newName);
+      	        System.out.println("Name updated successfully!!");
+      	        break;
+      	 	case 2 :
+      	 		System.out.println("Enter new age: ");
+      	        int newAge = input.nextInt();
+      	        super.setAge(newAge);
+      	        System.out.println("Age updated successfully!!");
+      	        break;
+      	 	case 3: 
+      	 		System.out.println("Enter new gender: ");
+      	        String newGender = input.nextLine();
+      	        super.setGender(newGender);
+      	        System.out.println("Gender updated successfully!!");
+      	        break;
+      	 	case 4:
+      	 		return;
+      	 	default: 
+      	 		System.out.println("Please input the right option");
+       }
+	
 	}
 
 
