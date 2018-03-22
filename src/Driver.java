@@ -36,7 +36,7 @@ public class Driver {
 				displayAll();
 				break;
 			case 2: // select a profile
-				person.displayProfile(ppl);
+				ppl.selectPerson().displayProfile();
 				break;
 
 			case 3:
@@ -48,7 +48,9 @@ public class Driver {
 	public Person selectPerson() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter name: ");
-		return this.ppl.get(input.nextLine());
+		//return this.ppl.get(input.nextLine());
+		Person choice = this.get.ppl.get(input.nextLine());
+		 return choice;
 	}
 
 	// 0 main menu
@@ -176,6 +178,10 @@ public class Driver {
 	}
 
 	// 5. Are they friends
+	
+	public void checkFriendship() {
+		
+	}
 
 	// 6. Delete profile
 	public void deletePerson() {

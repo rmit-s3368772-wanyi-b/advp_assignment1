@@ -54,7 +54,8 @@ public abstract class Person {
    
    
 
-//   public void displayProfile(Map<String, Person> ppl){
+   public void displayProfile(Map<String, Person> ppl){}
+   public void updateProfile() {}
 //      Scanner input = new Scanner(System.in);
 //      System.out.println("Enter name: ");
 //      String name = input.nextLine();

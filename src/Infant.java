@@ -6,7 +6,7 @@ import java.util.*;
  *
  */
 
-class Infant extends Person implements Profile {
+class Infant extends Person {
 
 	// variables
 	private Map<String, Adult> parents;
@@ -54,7 +54,7 @@ class Infant extends Person implements Profile {
 		}
 	}
 
-	@Override
+
 	public void displayProfile() {
 		// TODO Auto-generated method stub
 		System.out.println("Name: " + this.getName());
@@ -64,7 +64,7 @@ class Infant extends Person implements Profile {
 		System.out.println("Mother: " + this.getMother().getName());	
 	}
 
-	@Override
+
 	public void updateProfile(Map<String,Person> map) {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner (System.in);

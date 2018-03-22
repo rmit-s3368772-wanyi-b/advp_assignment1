@@ -5,7 +5,7 @@ import java.util.*;
  * @author huanineupane
  */
 
-class Teen extends Person implements Profile{
+class Teen extends Person {
 
    // variables
    private String status;
@@ -85,7 +85,7 @@ class Teen extends Person implements Profile{
       return this.friends.containsKey(a.getName()) == true ? true : false ;
    }
 
-	@Override
+
 	public void displayProfile() {
 		// TODO Auto-generated method stub
 		System.out.println("Name: " + this.getName());
@@ -96,7 +96,7 @@ class Teen extends Person implements Profile{
 		System.out.println("Mother: " + this.getMother().getName());	
 	}
 	
-	@Override
+
 	public void updateProfile(Map<String,Person> map) {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner (System.in);

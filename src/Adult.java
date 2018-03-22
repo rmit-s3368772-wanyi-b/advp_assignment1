@@ -3,10 +3,10 @@ import java.util.Map.Entry;
 
 /**
  * Class to handle the requirements to create an Adult.
- * @author Wan Yi Beh
+ * @author huanineupane
  */
 
-class Adult extends Person implements Profile{
+class Adult extends Person {
 
    // variables
    private String status;
@@ -99,7 +99,7 @@ class Adult extends Person implements Profile{
 
    }
 
-	@Override
+	
 	public void displayProfile() {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner (System.in);
@@ -115,7 +115,7 @@ class Adult extends Person implements Profile{
 		}
 	}
 	
-	@Override
+	
 	public void updateProfile(Map<String,Person> map) {
 	
 		Scanner input = new Scanner (System.in);
