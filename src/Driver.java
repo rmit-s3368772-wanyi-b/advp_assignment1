@@ -1,61 +1,65 @@
 import java.util.*;
 
 /**
- *
- * @author Wan Yi Beh
- */
+* The MiniNet program implements an application that
+* that keeps track of information in a simple social network.
+*
+* @author  Wan Yi Beh (S3368772)
+* @version 1.0
+* @since   2018-03-23
+*/
 
 public class Driver {
 
-	// variables
 	int select;
 	Person person = null;
 	Map<String, Person> ppl = new HashMap<>();
 
-	// constructors
-	public Driver(Map<String, Person> _ppl) {
-		this.ppl = _ppl;
-	}
+	public Driver(Map<String, Person> _ppl) { this.ppl = _ppl; }
 
-	// test cases
+	/**
+	* Intialise a list of sample people to
+	* be tested out on application.
+	*/
 	public void initialiseObj(Map<String, Person> _ppl) {
-		
-		//Initialing some Adults
-		_ppl.put("Adam Lambert", new Adult("Adam Lambert", 27, "Male", "work in KFC"));
+
+		// Initialing a list of Adult(s)
+		_ppl.put("Adam Lambert",
+				new Adult("Adam Lambert", 27, "Male", "work in KFC"));
 		_ppl.put("Alice", new Adult("Alice", 28, "Female", "CEO"));
-		_ppl.put("Chandler", new Adult("Chandler", 20, "Male", "Student in RMIT"));
+		_ppl.put("Chandler",
+				new Adult("Chandler", 20, "Male", "Student in RMIT"));
 		_ppl.put("Sarah", new Adult("Sarah", 35, "Female", "Writer for Age"));
 		_ppl.put("Bob", new Adult("Bob", 34, "Male", "Tradie by day"));
 		_ppl.put("Peter", new Adult("Peter", 19, "Male", "Driving a taxi"));
 		_ppl.put("Kate", new Adult("Kate", 21, "Female", "Just chilling"));
 
-		//Setting some example partnerships
+		// Setting partners
 		((Adult) _ppl.get("Alice")).setPartner((Adult) _ppl.get("Bob"));
 		((Adult) _ppl.get("Sarah")).setPartner((Adult) _ppl.get("Chandler"));
 		((Adult) _ppl.get("Kate")).setPartner((Adult) _ppl.get("Adam Lambert"));
-		((Adult) _ppl.get("Kate")).setPartner((Adult) _ppl.get("Peter"));
 
-		//Initializing some Teens and Infants
-		_ppl.put("Huani", new Teen ("Huani", 8, "Female", "doing PhD at RMIT",
+		// Initializing a list of Teen(s) and Infant(s)
+		_ppl.put("Adam", new Teen("Adam", 8, "Female", "doing PhD at RMIT",
 				(Adult) this.ppl.get("Chandler")));
-		_ppl.put("Gigi", new Teen ("Gigi", 10, "Female", "studying at a highschool",
-				(Adult) this.ppl.get("Bob")));
-		_ppl.put("Ivan", new Infant("Ivan", 1, "Male", 
+		_ppl.put("Gigi", new Teen("Gigi", 10, "Female",
+				"studying at a highschool", (Adult) this.ppl.get("Bob")));
+		_ppl.put("Ivan", new Infant("Ivan", 1, "Male",
 				(Adult) this.ppl.get("Adam Lambert")));
 
-		
-		
-		//Adding friends 
+		// Setting friends
 		((Adult) _ppl.get("Bob")).addFriend((Adult) _ppl.get("Peter"));
 		((Adult) _ppl.get("Bob")).addFriend((Adult) _ppl.get("Alice"));
 		((Adult) _ppl.get("Alice")).addFriend((Adult) _ppl.get("Peter"));
 		((Adult) _ppl.get("Adam Lambert")).addFriend((Adult) _ppl.get("Bob"));
 		((Adult) _ppl.get("Kate")).addFriend((Adult) _ppl.get("Alice"));
-		((Teen) _ppl.get("Huani")).addFriend((Teen) _ppl.get("Gigi"));
+		((Teen) _ppl.get("Adam")).addFriend((Teen) _ppl.get("Gigi"));
 
-		
 	}
 
+	/**
+	* Start run application - MiniNet.
+	*/
 	public void runNet() {
 
 		this.initialiseObj(ppl);
@@ -66,40 +70,38 @@ public class Driver {
 			displayMenu();
 			select = input.nextInt();
 			if (!((Integer) select instanceof Integer) || (select < 1) || (select > 8)) {
-				System.out.println(" --> Error: invalid input, no such option.");
+				System.out.println("--> Error: You entered an invalid input.");
 				continue;
 			}
-			
+
 			switch (select) {
-			case 1: // list everyone
+			case 1: // To list everyone
 				displayAll();
 				break;
 
-			case 2: // display
+			case 2: // To display profile of a selected person
 				if (selectPerson()) {
 					this.person.displayProfile();
 				} else
-					System.out.println(" --> Error: entered NAME does NOT EXIST.");
-
+					System.out.println("--> Error: Entered name does not exist.");
 				break;
 
-			case 3: // update
+			case 3: // To update profile of a selected person
 				if (selectPerson()) {
 					this.person.updateProfile(this.ppl);
 				} else
-					System.out.println(" --> Error: entered NAME does NOT EXIST.");
-
+					System.out.println("--> Error: Entered name does not exist.");
 				break;
 
-			case 4: // update selected profile
+			case 4: // To delete a person
 				deletePerson();
 				break;
 
-			case 5: // check for direct fiend of another person
+			case 5: // To verify the direct friendship of 2 person
 				checkFriends();
 				break;
 
-			case 6: // add a profile
+			case 6: // To add a person
 				Scanner sc = new Scanner(System.in);
 
 				System.out.println("Enter basic info below");
@@ -120,33 +122,20 @@ public class Driver {
 				} else {
 					addInfant(_name, _age, _gender);
 				}
-
 				break;
 
-			case 7: // find parents/child
+			case 7: // To find the family members of selected person
 				if (selectPerson()) {
 					this.person.listFamilyMembers();
 				} else
 					System.out.println(" --> Error: entered NAME does NOT EXIST.");
-
 				break;
-<<<<<<< HEAD
 
-            case 8: // connect two people
-               if (selectPerson()) {
-                  this.person.connectPeople();
-               } else
-                  System.out.println(" --> Error: entered NAME does NOT EXIST.");
-
-
-			case 10:
+			case 8:
 				System.out.println("Adam's partner: " + ((Adult) this.ppl.get("Adam")).getPartner().getName());
 				System.out.println("Alice's partner: " + ((Adult) this.ppl.get("Alice")).getPartner().getName());
 				break;
 
-=======
-				
->>>>>>> 6d77586f386d7d770f2912c413a20d3172b47f94
 			default:
 				break;
 			}
@@ -154,72 +143,27 @@ public class Driver {
 		} while (select != 9);
 	}
 
-	// public Person selectPerson() {
-	// Scanner input = new Scanner(System.in);
-	// System.out.println("Enter name: ");
-	//
-	// return this.ppl.get(input.nextLine());
-	// }
-
-	public void checkFriends() {
-		// Scanner sc = new Scanner(System.in);
-		Person firstPerson;
-
-		System.out.println("\n\n=CHECKING IF 2 PEOPLE ARE FRIENDS=\n");
-
-		System.out.print("- First Person \n  ");
-		if (selectPerson()) {
-			firstPerson = this.person;
-		} else {
-			System.out.println(" --> Error: entered NAME does NOT EXIST.");
-			return;
-		}
-
-		System.out.print("\n- Second Person \n  ");
-		if (!selectPerson()) {
-			System.out.println(" --> Error: entered NAME does NOT EXIST.");
-			return;
-		}
-		
-		//CASE 1: They are both Adult.
-		if (firstPerson.getAge() > 16 && this.person.getAge() > 16) {
-			if (((Adult) firstPerson).isFriend((Adult) this.person) == true) {
-				System.out.println("==> YES, " + firstPerson.getName() 
-							+ " is a friend of " + this.person.getName());
-				return;
-			} else {
-				System.out.println("==> NO, " + firstPerson.getName()
-							+ " is NOT a friend of " + this.person.getName());
-				return;
-			}
-		}
-
-		//CASE 2: They are both Teen.
-		if (firstPerson.getAge() > 2 && firstPerson.getAge() < 17 
-		 && this.person.getAge() > 2 && this.person.getAge() < 17) {
-			if (((Teen) firstPerson).isFriend((Teen) this.person) == true) {
-				System.out.println("==> YES, " + firstPerson.getName() 
-							+ " is a friend of " + this.person.getName());
-				return;
-			} else {
-				System.out.println("==> NO, " + firstPerson.getName()
-							+ " is NOT a friend of " + this.person.getName());
-				return;
-			}
-		}
-		
-		
-		//CASE 3: Any of them are Infant.
-		if (firstPerson.getAge() < 3 || this.person.getAge() < 3) {
-			System.out.println(" --> Error: At least 1 of entered name is an infant.\n"
-							+ "            An Infant canNOT have any friends.");
-			return;
-		}
-		
-		System.out.println(" -->Error: An Adult canNOT be friend with a Teen.");
-		return;
+	/**
+	*  To display main menu.
+	*/
+	private void displayMenu() {
+		System.out.println("\n\n\n********************************");
+		System.out.println("* ======== MiniNet Menu =======*");
+		System.out.println("* 1. List everyone             *");
+		System.out.println("* 2. Display a profile         *");
+		System.out.println("* 3. Add a profile             *");
+		System.out.println("* 4. Update a profile          *");
+		System.out.println("* 5. Delete a profile          *");
+		System.out.println("* 6. Are they friends?         *");
+		System.out.println("* 7. Find out family members   *");
+		System.out.println("* 8. Quit                      *");
+		System.out.println("********************************");
+		System.out.print("Enter an option: ");
 	}
-	
+
+	/**
+	*  To collect user's input on name.
+	*/
 	public boolean selectPerson() {
 		Scanner sc = new Scanner(System.in);
 
@@ -230,28 +174,12 @@ public class Driver {
 			this.person = this.ppl.get(input);
 			return true;
 		}
-
 		return false;
 	}
 
-	// 0 main menu
-	private void displayMenu() {
-		System.out.println("\n\n\n********************************");
-		System.out.println("* ======== MiniNet Menu =======*");
-		System.out.println("* 1. List everyone             *");
-		System.out.println("* 2. Display a profile         *");
-		System.out.println("* 3. Update a profile          *");
-		System.out.println("* 4. Delete a profile          *");
-		System.out.println("* 5. Are they friends?         *");
-		System.out.println("* 6. Add a profile             *");
-		System.out.println("* 7. Find out family members   *");
-        System.out.println("* 8. Find out family members   *");
-		System.out.println("* 9. Quit                      *");
-		System.out.println("********************************");
-		System.out.print("Enter an option: ");
-	}
-
-	// 1. list all people
+	/**
+	*  Main Menu - Case 1: To display a list of all people on the network.
+	*/
 	public void displayAll() {
 		// get set of the entries
 		Set set = this.ppl.entrySet();
@@ -269,7 +197,9 @@ public class Driver {
 		}
 	}
 
-	// add a profile
+	/**
+	*  Main Menu - Case 3: To add an Adult in the network.
+	*/
 	public void addAdult(String name, int age, String gender) {
 		Scanner input = new Scanner(System.in);
 		System.out.printf("%-10s", "- Status: ");
@@ -277,6 +207,9 @@ public class Driver {
 		ppl.put(name, new Adult(name, age, gender, status));
 	}
 
+	/**
+	*  Main Menu - Case 3: To add a Teen in the network.
+	*/
 	public void addTeen(String name, int age, String gender) {
 		Scanner input = new Scanner(System.in);
 
@@ -296,6 +229,9 @@ public class Driver {
 		a.getPartner().setChild(teen);
 	}
 
+	/**
+	*  Main Menu - Case 3: To add an Infant in the network.
+	*/
 	public void addInfant(String name, int age, String gender) {
 		Scanner input = new Scanner(System.in);
 
@@ -313,7 +249,82 @@ public class Driver {
 
 	}
 
-	// display married people list
+	/**
+	*  Main Menu - Case 5: To delete a person in the network.
+	*/
+	public void deletePerson() {
+		// remove person from the list
+		if (selectPerson()) {
+			this.ppl.remove(this.person.getName());
+			System.out.println(" --> " + this.person.getName() + "'s profile: DELETED.");
+		} else
+			System.out.println(" --> Error: entered NAME does NOT EXIST.");
+	}
+
+	/**
+	*  Main Menu - Case 6: To verify the direct friendship of 2 person.
+	*/
+	public void checkFriends() {
+
+		Person firstPerson;
+
+		System.out.println("\n\n= Verify if 2 people are friends =\n");
+		System.out.print("- First Person \n  ");
+		if (selectPerson()) {
+			firstPerson = this.person;
+		} else {
+			System.out.println("--> Error: Entered name does not exist.");
+			return;
+		}
+
+		System.out.print("\n- Second Person \n  ");
+		if (!selectPerson()) {
+			System.out.println("--> Error: Entered name does not exist.");
+			return;
+		}
+
+		// Scenario 1: They are both Adults.
+		if (firstPerson.getAge() > 16 && this.person.getAge() > 16) {
+			if (((Adult) firstPerson).isFriend((Adult) this.person) == true) {
+				System.out.println("--> YES, " + firstPerson.getName()
+							+ " is a friend of " + this.person.getName());
+				return;
+			} else {
+				System.out.println("--> NO, " + firstPerson.getName()
+							+ " is NOT a friend of " + this.person.getName());
+				return;
+			}
+		}
+
+		// Scenario 2: They are both Teens.
+		if (firstPerson.getAge() > 2 && firstPerson.getAge() < 17
+		 && this.person.getAge() > 2 && this.person.getAge() < 17) {
+			if (((Teen) firstPerson).isFriend((Teen) this.person) == true) {
+				System.out.println("--> YES, " + firstPerson.getName()
+							+ " is a friend of " + this.person.getName());
+				return;
+			} else {
+				System.out.println("--> NO, " + firstPerson.getName()
+							+ " is NOT a friend of " + this.person.getName());
+				return;
+			}
+		}
+
+		// Scenario 3: Any of them are Infant.
+		if (firstPerson.getAge() < 3 || this.person.getAge() < 3) {
+			System.out.println("--> Error: At least 1 of entered name is an infant.\n"
+							+ "            An Infant is not allow to have any friends.");
+			return;
+		}
+
+		System.out.println("--> Error: An Adult is not allowed to be friends with a Teen.");
+		return;
+	}
+
+
+	/**
+	*  To display a list of coupled people.
+	*/
 	public void displayMarriedPeople() {
 
 		Set set = this.ppl.entrySet();
@@ -335,7 +346,9 @@ public class Driver {
 		}
 	}
 
-	// verify marriage people name input
+	/**
+	*  To verify if a person has a partner.
+	*/
 	public Adult verifyMarriedList(String input) {
 
 		Set set = this.ppl.entrySet();
@@ -358,24 +371,4 @@ public class Driver {
 		}
 		return null;
 	}
-
-	// 5. Are they friends
-	public void checkFriendship() {
-
-	}
-
-	// 6. Delete profile4
-	public void deletePerson() {
-		// remove person from the list
-		if (selectPerson()) {
-			this.ppl.remove(this.person.getName());
-			System.out.println(" --> " + this.person.getName() + "'s profile: DELETED.");
-		} else
-			System.out.println(" --> Error: entered NAME does NOT EXIST.");
-	}
-
-	// 7. Find parents/children
-
-	// 8. QUIT!!!
-
 }

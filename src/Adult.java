@@ -1,31 +1,32 @@
 import java.util.*;
 import java.util.Map.Entry;
 
-/**
+
+ /**
  * Class to handle the requirements to create an Adult.
- * 
- * @author Huani Neupane (s3685849)
+ *
+ * @author  Huani Neupane (s3685849)
+ * @version 1.0
+ * @since   2018-03-23
  */
 
 class Adult extends Person {
 
-	// variables
 	private String status;
 	private Adult partner;
 	private Map<String, Adult> friends = new HashMap<>();
 	private Map<String, Person> children = new HashMap<>();
-<<<<<<< HEAD
-	
-=======
->>>>>>> 6d77586f386d7d770f2912c413a20d3172b47f94
 
-	// constructor
 	public Adult(String _name, int _age, String _gender, String _status) {
 		super(_name, _age, _gender);
 		this.status = _status;
 	}
 
-	// accessor
+	/**
+     * Accessor
+     * @return status of Person.
+     * @return partner of Person.
+     */
 	public String getStatus() {
 		return this.status;
 	}
@@ -34,8 +35,15 @@ class Adult extends Person {
 		return this.partner;
 	}
 
-	// mutators
-	
+	/**
+     * Mutators
+     */
+
+ 	public String displayPartner() {
+ 		return this.partner.getName();
+ 	}
+
+	// To add friend to an Adult.
 	public boolean addFriend(Person person)
 	{
 		if (person.getAge() > 16)
@@ -47,49 +55,12 @@ class Adult extends Person {
 		return false;
 	}
 
-	public void connectPeople(Person a) {
-       Scanner input = new Scanner(System.in);
-
-       System.out.println("\n********************************");
-       System.out.println("* 1. Add a friend                *");
-       System.out.println("* 2. Add a child                 *");
-       System.out.println("* 3. Add a partner               *");
-       System.out.println("* 4. Quit                        *");
-       System.out.println("********************************");
-       System.out.print("Enter an option: ");
-
-       int choice = input.nextInt();
-
-       switch (choice) {
-          case 1:
-             System.out.println("Enter your friend's name: ");
-             String newFriend = input.nextLine();
-             //this.friends.put(a.getName(), a);
-             System.out.println("Friend added successfully!!");
-             break;
-          case 2:
-             System.out.println("Enter your child's name: ");
-             int newChild = input.nextInt();
-             //super.setAge(newAge);
-             System.out.println("Child added successfully!!");
-             break;
-          case 3:
-             System.out.println("Enter your partner's name: ");
-             String newPartner = input.nextLine();
-             //super.setGender(newGender);
-             System.out.println("Partner added successfully!!");
-             break;
-          case 4:
-             return;
-          default:
-             System.out.println("Please input the right option");
-       }
-    }
-
+	// To set status to an Adult.
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	// To set partner to an Adult.
 	public void setPartner(Adult _partner) {
 		//Assumption: no divorce/changing partner allowed
 		if (this.partner != null)
@@ -98,17 +69,16 @@ class Adult extends Person {
 							+ "             to a MARRIED person!!!");
 			return;
 		}
-		
 		this.partner = _partner;
 		_partner.partner = this;
 	}
 
-
+	// To set child to an Adult.
 	public void setChild(Person a) {
 		this.children.put(a.getName(), a);
 	}
 
-	// display friend list
+	// To display a list of friends of an Adult.
 	public void displayFriendList() {
 		// get set of the entries
 		Set set = this.friends.entrySet();
@@ -126,20 +96,15 @@ class Adult extends Person {
 		}
 	}
 
-	// display partner
-	public String displayPartner() {
-		return this.partner.getName();
-	}
-
-	// display family members
+	// To display a list of family members of an Adult.
 	public void listFamilyMembers() {
-		
+
 		if (this.children.size() == 0)
 		{
 			System.out.println(this.getName() + " has no children, unfortunately!");
 			return;
 		}
-		
+
 		// get set of the entries
 		Set set = this.children.entrySet();
 
@@ -156,11 +121,12 @@ class Adult extends Person {
 		}
 	}
 
-	// check if 2 person are friends
+	// To check if the two Adults are friends.
 	public boolean isFriend(Person a) {
 		return this.friends.containsKey(a.getName()) == true ? true : false;
 	}
 
+	// To display profile of an Adult.
 	public void displayProfile() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
@@ -171,9 +137,11 @@ class Adult extends Person {
 		}
 	}
 
+
+	// To update profile of an Adult.
 	public void updateProfile(Map<String,Person> map) {
 		int choice = 0;
-		
+
 		do {
 			System.out.println("\n********************************");
 			System.out.println("* 1. Update name               *");
@@ -187,7 +155,7 @@ class Adult extends Person {
 			Scanner input = new Scanner(System.in);
 			choice = input.nextInt();
 			input.nextLine();
-			
+
 			switch (choice) {
 			case 1:
 				System.out.println("Enter new name: ");
@@ -222,12 +190,4 @@ class Adult extends Person {
 		} while (choice != 5);
 
 	}
-<<<<<<< HEAD
-=======
-//<<<<<<< HEAD
-//
-//=======
-//>>>>>>> a39832e997e5db4ba8586ed4252e12ac4837bcba
-//>>>>>>> 6b0f89dfbaa10c35382dc107d7626a576b3558a8
->>>>>>> 6d77586f386d7d770f2912c413a20d3172b47f94
 }

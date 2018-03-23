@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * 
+ *
  * @author Huani Neupane (s3685849)
  */
 
@@ -12,9 +12,6 @@ class Teen extends Person {
 	private Map<String, Teen> friends = new HashMap<>();
 	private Map<String, Adult> parents = new HashMap<>();
 
-	// ppl.get("father");
-
-	// constructor
 	public Teen(String name, int age, String gender, String _status, Adult father) {
 		super(name, age, gender);
 		this.status = _status;
@@ -24,24 +21,31 @@ class Teen extends Person {
 		father.getPartner().setChild(this);
 	}
 
-	// accessor
+	/**
+     * Accessor
+     * @return status of Person.
+     * @return father of Person.
+     * @return mother of Person.
+     */
 	public String getStatus() {
 		return status;
 	}
-
 	public Adult getFather() {
 		return this.parents.get("Father");
 	}
-
 	public Adult getMother() {
 		return this.parents.get("Mother");
 	}
 
-	// mutator
+	/**
+     * Mutator
+     * @param status of Person.
+     */
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	// To add friend of a Teen.
 	public boolean addFriend(Person person)
 	{
 		if (person.getAge() > 2 && person.getAge() < 17)
@@ -53,7 +57,7 @@ class Teen extends Person {
 		return false;
 	}
 
-	// display friend list
+	// To display a list of friends of a Teen.
 	public void displayFriendList() {
 
 		// get set of the entries
@@ -71,17 +75,18 @@ class Teen extends Person {
 		}
 	}
 
-	// check if 2 person are friends
+	// To check if 2 Teens are friends.
 	public boolean isFriend(Person a) {
 		return this.friends.containsKey(a.getName()) == true ? true : false;
 	}
 
-	// display family members
+	// To display a list of family members of a Teen.
 	public void listFamilyMembers() {
 		System.out.println("- Father: " + this.parents.get("Father").getName());
 		System.out.println("- Mother: " + this.parents.get("Mother").getName());
 	}
 
+	// To display profile of a Teen.
 	public void displayProfile() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
@@ -91,6 +96,7 @@ class Teen extends Person {
 		System.out.println("Mother: " + this.getMother().getName());
 	}
 
+	// To update profile of a Teen.
 	public void updateProfile(Map<String,Person> map) {
 		System.out.println("\n********************************");
 		System.out.println("* 1. Update name               *");

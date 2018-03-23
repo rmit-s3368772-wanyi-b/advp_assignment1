@@ -8,10 +8,8 @@ import java.util.*;
 
 class Infant extends Person {
 
-	// variables
 	private Map<String, Adult> parents = new HashMap<>();
 
-	// constructor
 	public Infant(String name, int age, String gender, Adult father) {
 		super(name, age, gender);
 		this.parents.put("Father", father);
@@ -20,7 +18,11 @@ class Infant extends Person {
 		father.getPartner().setChild(this);
 	}
 
-	// accessor
+	/**
+     * Accessor
+     * @return father of Person.
+     * @return mother of Person.
+     */
 	public Adult getFather() {
 		return this.parents.get("Father");
 	}
@@ -29,28 +31,7 @@ class Infant extends Person {
 		return this.parents.get("Mother");
 	}
 
-	// display parents list
-//	public void displayParents() {
-//
-//		// get set of the entries
-//		Set set = this.parents.entrySet();
-//
-//		// get an iterator
-//		Iterator iterator = set.iterator();
-//
-//		// display the list
-//		// System.out.println("=====LIST NAMES OF FRIENDS====");
-//		while (iterator.hasNext()) {
-//			Map.Entry list = (Map.Entry) iterator.next();
-//			// System.out.println(list.getKey());//Since Key is a copy of obj name
-//			if (list.getKey().equals("Father")) {
-//				System.out.println("Father: " + ((Person) list.getValue()).getName());
-//			} else {
-//				System.out.println("Mother: " + ((Person) list.getValue()).getName());
-//			}
-//		}
-//	}
-
+	// To display profile of an Infant.
 	public void displayProfile() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
@@ -59,14 +40,14 @@ class Infant extends Person {
 		System.out.println("Mother: " + this.getMother().getName());
 	}
 
-	// display family members
+	// To display a list of family members of an Infant.
 	public void listFamilyMembers() {
 		System.out.println("- Father: " + this.parents.get("Father").getName());
 		System.out.println("- Mother: " + this.parents.get("Mother").getName());
 	}
 
+	// To update profile of an Infant.
 	public void updateProfile(Map<String,Person> map) {
-
 		System.out.println("\n********************************");
 		System.out.println("* 1. Update name               *");
 		System.out.println("* 2. Update age                *");
