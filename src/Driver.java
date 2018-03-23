@@ -8,9 +8,9 @@ import java.util.*;
 public class Driver {
 
 	// Attributes
-	int select;
-	Person person = null;
-	Map<String, Person> ppl = new HashMap<>();
+	private int select;
+	private Person person = null;
+	private Map<String, Person> ppl = new HashMap<>();
 
 	// Constructors
 	public Driver(Map<String, Person> _ppl) {
