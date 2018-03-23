@@ -12,10 +12,12 @@ class Infant extends Person {
 	private Map<String, Adult> parents = new HashMap<>();
 
 	// constructor
-	public Infant(String name, int age, String gender, Adult father, Adult mother) {
+	public Infant(String name, int age, String gender, Adult father) {
 		super(name, age, gender);
 		this.parents.put("Father", father);
-		this.parents.put("Mother", mother);
+		this.parents.put("Mother", father.getPartner());
+		father.setChild(this);
+		father.getPartner().setChild(this);
 	}
 
 	// accessor
@@ -28,26 +30,26 @@ class Infant extends Person {
 	}
 
 	// display parents list
-	public void displayParents() {
-
-		// get set of the entries
-		Set set = this.parents.entrySet();
-
-		// get an iterator
-		Iterator iterator = set.iterator();
-
-		// display the list
-		// System.out.println("=====LIST NAMES OF FRIENDS====");
-		while (iterator.hasNext()) {
-			Map.Entry list = (Map.Entry) iterator.next();
-			// System.out.println(list.getKey());//Since Key is a copy of obj name
-			if (list.getKey().equals("Father")) {
-				System.out.println("Father: " + ((Person) list.getValue()).getName());
-			} else {
-				System.out.println("Mother: " + ((Person) list.getValue()).getName());
-			}
-		}
-	}
+//	public void displayParents() {
+//
+//		// get set of the entries
+//		Set set = this.parents.entrySet();
+//
+//		// get an iterator
+//		Iterator iterator = set.iterator();
+//
+//		// display the list
+//		// System.out.println("=====LIST NAMES OF FRIENDS====");
+//		while (iterator.hasNext()) {
+//			Map.Entry list = (Map.Entry) iterator.next();
+//			// System.out.println(list.getKey());//Since Key is a copy of obj name
+//			if (list.getKey().equals("Father")) {
+//				System.out.println("Father: " + ((Person) list.getValue()).getName());
+//			} else {
+//				System.out.println("Mother: " + ((Person) list.getValue()).getName());
+//			}
+//		}
+//	}
 
 	public void displayProfile() {
 		// TODO Auto-generated method stub
@@ -60,21 +62,11 @@ class Infant extends Person {
 
 	// display family members
 	public void listFamilyMembers() {
-		// get set of the entries
-		Set set = this.parents.entrySet();
-
-		// get an iterator
-		Iterator iterator = set.iterator();
-
-		// display the list
-		System.out.println("===== My Parents ====");
-		while (iterator.hasNext()) {
-			Map.Entry list = (Map.Entry) iterator.next();
-			System.out.println("- " + list.getKey() + ": " + ((Adult) list.getValue()).getName());
-		}
+		System.out.println("- Father: " + this.parents.get("Father").getName());
+		System.out.println("- Mother: " + this.parents.get("Mother").getName());
 	}
 
-	public void updateProfile() {
+	public void updateProfile(Map<String,Person> map) {
 
 		System.out.println("\n********************************");
 		System.out.println("* 1. Update name               *");
@@ -92,7 +84,8 @@ class Infant extends Person {
 		case 1:
 			System.out.println("Enter new name: ");
 			String newName = input.nextLine();
-			super.setName(newName);
+			map.put( newName, map.remove(this.getName()) );
+			this.setName(newName);
 			System.out.println("Name updated successfully!!");
 			break;
 		case 2:

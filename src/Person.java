@@ -34,8 +34,8 @@ public abstract class Person {
 	}
 
 	// mutators
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String _name) {
+		this.name = _name;
 	}
 
 	public void setAge(int age) {
@@ -50,6 +50,6 @@ public abstract class Person {
 
 	public abstract void listFamilyMembers();
 
-	public abstract void updateProfile();
+	public abstract void updateProfile(Map<String,Person> map);
 
 }

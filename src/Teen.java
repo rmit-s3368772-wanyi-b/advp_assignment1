@@ -15,11 +15,13 @@ class Teen extends Person {
 	// ppl.get("father");
 
 	// constructor
-	public Teen(String name, int age, String gender, String _status, Adult father, Adult mother) {
+	public Teen(String name, int age, String gender, String _status, Adult father) {
 		super(name, age, gender);
 		this.status = _status;
 		this.parents.put("Father", father);
-		this.parents.put("Mother", mother);
+		this.parents.put("Mother", father.getPartner());
+		father.setChild(this);
+		father.getPartner().setChild(this);
 	}
 
 	// accessor
@@ -69,28 +71,6 @@ class Teen extends Person {
 		}
 	}
 
-	// display parents list
-	// public void displayParents() {
-	//
-	// // get set of the entries
-	// Set set = this.parents.entrySet();
-	//
-	// // get an iterator
-	// Iterator iterator = set.iterator();
-	//
-	// // display the list
-	// System.out.println("=====LIST NAMES OF FRIENDS====");
-	// while (iterator.hasNext())
-	// {
-	// Map.Entry list = (Map.Entry) iterator.next();
-	// System.out.println(list.getKey());//Since Key is a copy of obj name
-	// if (list.getKey().equals("father"))
-	// {
-	// System.out.println("Father: " + ((Person) list.getValue()).getName());
-	// }
-	// }
-	// }
-
 	// check if 2 person are friends
 	public boolean isFriend(Person a) {
 		return this.friends.containsKey(a.getName()) == true ? true : false;
@@ -98,18 +78,8 @@ class Teen extends Person {
 
 	// display family members
 	public void listFamilyMembers() {
-		// get set of the entries
-		Set set = this.parents.entrySet();
-
-		// get an iterator
-		Iterator iterator = set.iterator();
-
-		// display the list
-		System.out.println("===== My Parents ====");
-		while (iterator.hasNext()) {
-			Map.Entry list = (Map.Entry) iterator.next();
-			System.out.println("- " + list.getKey() + ": " + ((Adult) list.getValue()).getName());
-		}
+		System.out.println("- Father: " + this.parents.get("Father").getName());
+		System.out.println("- Mother: " + this.parents.get("Mother").getName());
 	}
 
 	public void displayProfile() {
@@ -121,7 +91,7 @@ class Teen extends Person {
 		System.out.println("Mother: " + this.getMother().getName());
 	}
 
-	public void updateProfile() {
+	public void updateProfile(Map<String,Person> map) {
 		System.out.println("\n********************************");
 		System.out.println("* 1. Update name               *");
 		System.out.println("* 2. Update age                *");
@@ -139,7 +109,8 @@ class Teen extends Person {
 		case 1:
 			System.out.println("Enter new name: ");
 			String newName = input.nextLine();
-			super.setName(newName);
+			map.put( newName, map.remove(this.getName()) );
+			this.setName(newName);
 			System.out.println("Name updated successfully!!");
 			break;
 		case 2:
