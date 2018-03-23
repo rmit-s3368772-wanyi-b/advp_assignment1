@@ -2,160 +2,169 @@ import java.util.*;
 
 /**
  * 
- * @author huanineupane
+ * @author Huani Neupane (s3685849)
  */
 
 class Teen extends Person {
 
-   // variables
-   private String status;
-   private Map<String, Teen> friends;
-   private Map<String, Adult> parents;
+	// variables
+	private String status;
+	private Map<String, Teen> friends = new HashMap<>();
+	private Map<String, Adult> parents = new HashMap<>();
 
-   //ppl.get("father");
+	// ppl.get("father");
 
-   // constructor
-   public Teen (String name, int age, String gender, String status, Adult father, Adult mother) {
-      super(name, age, gender);
-      this.status = status;
-      this.parents.put("father", father);
-      this.parents.put("mother", mother);
-   }
+	// constructor
+	public Teen(String name, int age, String gender, String _status, Adult father, Adult mother) {
+		super(name, age, gender);
+		this.status = _status;
+		this.parents.put("Father", father);
+		this.parents.put("Mother", mother);
+	}
 
-   // accessor
-    public String getStatus() {
-      return status;
-   }
+	// accessor
+	public String getStatus() {
+		return status;
+	}
 
-   public Adult getFather() {
-      return this.parents.get("father");
-   }
+	public Adult getFather() {
+		return this.parents.get("Father");
+	}
 
-   public Adult getMother() {
-      return this.parents.get("mother");
-   }
+	public Adult getMother() {
+		return this.parents.get("Mother");
+	}
 
-   // mutator
-   public void setStatus(String status) {
-      this.status = status;
-   }
+	// mutator
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public boolean addFriend(Person person)
+	{
+		if (person.getAge() > 2 && person.getAge() < 17)
+		{
+			this.friends.put(person.getName(), (Teen) person);
+			((Teen) person).friends.put(this.getName(), this);
+			return true;
+		}
+		return false;
+	}
 
-   // display friend list
-   public void displayFriendList () {
+	// display friend list
+	public void displayFriendList() {
 
-      // get set of the entries
-      Set set = this.friends.entrySet();
+		// get set of the entries
+		Set set = this.friends.entrySet();
 
-      // get an iterator
-      Iterator iterator = set.iterator();
+		// get an iterator
+		Iterator iterator = set.iterator();
 
-      // display the list
-      System.out.println("=====LIST NAMES OF FRIENDS====");
-         while (iterator.hasNext()) {
-            Map.Entry list = (Map.Entry) iterator.next();
-            System.out.println(list.getKey());//Since Key is a copy of obj name
-            //System.out.println(((Person) list.getValue()).getName());
-         }
-   }
+		// display the list
+		System.out.println("=====LIST NAMES OF FRIENDS====");
+		while (iterator.hasNext()) {
+			Map.Entry list = (Map.Entry) iterator.next();
+			System.out.println(list.getKey());// Since Key is a copy of obj name
+			// System.out.println(((Person) list.getValue()).getName());
+		}
+	}
 
-   // display parents list
-   public void displayParents() {
+	// display parents list
+	// public void displayParents() {
+	//
+	// // get set of the entries
+	// Set set = this.parents.entrySet();
+	//
+	// // get an iterator
+	// Iterator iterator = set.iterator();
+	//
+	// // display the list
+	// System.out.println("=====LIST NAMES OF FRIENDS====");
+	// while (iterator.hasNext())
+	// {
+	// Map.Entry list = (Map.Entry) iterator.next();
+	// System.out.println(list.getKey());//Since Key is a copy of obj name
+	// if (list.getKey().equals("father"))
+	// {
+	// System.out.println("Father: " + ((Person) list.getValue()).getName());
+	// }
+	// }
+	// }
 
-      // get set of the entries
-      Set set = this.parents.entrySet();
+	// check if 2 person are friends
+	public boolean isFriend(Person a) {
+		return this.friends.containsKey(a.getName()) == true ? true : false;
+	}
 
-      // get an iterator
-      Iterator iterator = set.iterator();
+	// display family members
+	public void listFamilyMembers() {
+		// get set of the entries
+		Set set = this.parents.entrySet();
 
-      // display the list
-      System.out.println("=====LIST NAMES OF FRIENDS====");
-         while (iterator.hasNext())
-         {
-            Map.Entry list = (Map.Entry) iterator.next();
-            System.out.println(list.getKey());//Since Key is a copy of obj name
-            if (list.getKey().equals("father"))
-            {
-                System.out.println("Father: " + ((Person) list.getValue()).getName());
-            }
-        }
-   }
+		// get an iterator
+		Iterator iterator = set.iterator();
 
-   // check if 2 person are friends
-   public boolean isFriend(Person a) {
-      return this.friends.containsKey(a.getName()) == true ? true : false ;
-   }
-
+		// display the list
+		System.out.println("===== My Parents ====");
+		while (iterator.hasNext()) {
+			Map.Entry list = (Map.Entry) iterator.next();
+			System.out.println("- " + list.getKey() + ": " + ((Adult) list.getValue()).getName());
+		}
+	}
 
 	public void displayProfile() {
-		// TODO Auto-generated method stub
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
 		System.out.println("Gender: " + this.getGender());
 		System.out.println("Status: " + this.getStatus());
 		System.out.println("Father: " + this.getFather().getName());
-		System.out.println("Mother: " + this.getMother().getName());	
+		System.out.println("Mother: " + this.getMother().getName());
 	}
-	
 
-	public void updateProfile(Map<String,Person> map) {
-		// TODO Auto-generated method stub
-		Scanner input = new Scanner (System.in);
-	     System.out.println("Enter a name from the existing list please: ");
-	     String oldName = input.nextLine();
-	     
-	     if (map.get(oldName) != null) {
-	    	 	System.out.println(oldName + "found! ");
-	     }else
-	     {
-	    	  	System.out.println("Name not found! ");
-	    	  	return;
-	     }
-	   
-       System.out.println("\n********************************");
-       System.out.println("* 1. Update name               *");
-       System.out.println("* 2. Update age                *");
-       System.out.println("* 3. Update gender             *");
-       System.out.println("* 4. Update status             *");
-       System.out.println("* 5. Quit                      *");
-       System.out.println("********************************");
-       System.out.print("Enter an option: ");
-       
-    
-       System.out.println("Enter your choice please: ");
-       int choice = input.nextInt();
-       
-       switch(choice) {
-      	 	case 1 : 
-      	 		System.out.println("Enter new name: ");
-      	        String newName = input.nextLine();
-      	        super.setName(newName);
-      	        System.out.println("Name updated successfully!!");
-      	        break;
-      	 	case 2 :
-      	 		System.out.println("Enter new age: ");
-      	        int newAge = input.nextInt();
-      	        super.setAge(newAge);
-      	        System.out.println("Age updated successfully!!");
-      	        break;
-      	 	case 3: 
-      	 		System.out.println("Enter new gender: ");
-      	        String newGender = input.nextLine();
-      	        super.setGender(newGender);
-      	        System.out.println("Gender updated successfully!!");
-      	        break;
-      	 	case 4: 
-      	 		System.out.println("Enter new status: ");
-      	        String newStatus = input.nextLine();
-      	        setStatus(newStatus);
-      	        System.out.println("Status updated successfully!!");
-      	 		break;  
-      	 	case 5:
-      	 		return;
-      	 	default: 
-      	 		System.out.println("Please input the right option");
-       }
+	public void updateProfile() {
+		System.out.println("\n********************************");
+		System.out.println("* 1. Update name               *");
+		System.out.println("* 2. Update age                *");
+		System.out.println("* 3. Update gender             *");
+		System.out.println("* 4. Update status             *");
+		System.out.println("* 5. Quit                      *");
+		System.out.println("********************************");
+		System.out.print("Enter an option: ");
+
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter your choice please: ");
+		int choice = input.nextInt();
+
+		switch (choice) {
+		case 1:
+			System.out.println("Enter new name: ");
+			String newName = input.nextLine();
+			super.setName(newName);
+			System.out.println("Name updated successfully!!");
+			break;
+		case 2:
+			System.out.println("Enter new age: ");
+			int newAge = input.nextInt();
+			super.setAge(newAge);
+			System.out.println("Age updated successfully!!");
+			break;
+		case 3:
+			System.out.println("Enter new gender: ");
+			String newGender = input.nextLine();
+			super.setGender(newGender);
+			System.out.println("Gender updated successfully!!");
+			break;
+		case 4:
+			System.out.println("Enter new status: ");
+			String newStatus = input.nextLine();
+			setStatus(newStatus);
+			System.out.println("Status updated successfully!!");
+			break;
+		case 5:
+			return;
+		default:
+			System.out.println("Please input the right option");
+		}
 	}
-		
-	
 
 }
