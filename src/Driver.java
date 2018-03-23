@@ -178,9 +178,7 @@ public class Driver {
 	}
 
 	// 5. Are they friends
-	
 	public void checkFriendship() {
-		
 	}
 
 	// 6. Delete profile
