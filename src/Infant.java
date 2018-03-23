@@ -50,7 +50,6 @@ class Infant extends Person {
 	}
 
 	public void displayProfile() {
-		// TODO Auto-generated method stub
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
 		System.out.println("Gender: " + this.getGender());

@@ -114,6 +114,13 @@ public class Driver {
 
 				break;
 
+            case 8: // connect two people
+               if (selectPerson()) {
+                  this.person.connectPeople();
+               } else
+                  System.out.println(" --> Error: entered NAME does NOT EXIST.");
+
+
 			case 10:
 				System.out.println("Adam's partner: " + ((Adult) this.ppl.get("Adam")).getPartner().getName());
 				System.out.println("Alice's partner: " + ((Adult) this.ppl.get("Alice")).getPartner().getName());
@@ -123,7 +130,7 @@ public class Driver {
 				break;
 			}
 
-		} while (select != 8);
+		} while (select != 9);
 	}
 
 	// public Person selectPerson() {
@@ -217,7 +224,8 @@ public class Driver {
 		System.out.println("* 5. Are they friends?         *");
 		System.out.println("* 6. Add a profile             *");
 		System.out.println("* 7. Find out family members   *");
-		System.out.println("* 8. Quit                      *");
+        System.out.println("* 8. Find out family members   *");
+		System.out.println("* 9. Quit                      *");
 		System.out.println("********************************");
 		System.out.print("Enter an option: ");
 	}
@@ -331,13 +339,8 @@ public class Driver {
 	}
 
 	// 5. Are they friends
-<<<<<<< HEAD
-	public void checkFriendship() {
-=======
-
 	public void checkFriendship() {
 
->>>>>>> f83a9cdb8555ad953923a3d2b62b9f92119fea4d
 	}
 
 	// 6. Delete profile4

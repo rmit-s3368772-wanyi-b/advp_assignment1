@@ -14,50 +14,8 @@ class Adult extends Person {
 	private Adult partner;
 	private Map<String, Adult> friends = new HashMap<>();
 	private Map<String, Person> children = new HashMap<>();
-
-<<<<<<< HEAD
-   @Override
-   public void displayProfile() {
-      // TODO Auto-generated method stub
-      System.out.println("Name: " + this.getName());
-      System.out.println("Age: " + this.getAge());
-      System.out.println("Gender: " + this.getGender());
-      System.out.println("Status: " + this.getStatus());
-      if (this.getPartner() != null) {
-         System.out.println("Partner: " + this.getPartner().getName());
-      }
-   }
 	
-	@Override
-	public void updateProfile() {
-       // TODO Auto-generated method stub
-       Scanner input = new Scanner(System.in);
-       System.out.println("Enter a name from the existing list please: ");
-       String initialName = input.nextLine();
 
-       System.out.println("\n********************************");
-       System.out.println("* 1. Update name               *");
-       System.out.println("* 2. Update age                *");
-       System.out.println("* 3. Update gender             *");
-       System.out.println("* 4. Update status             *");
-       System.out.println("* 5. Quit                      *");
-       System.out.println("********************************");
-       System.out.print("Enter an option: ");
-
-
-       System.out.println("Enter your choice please: ");
-       int choice = input.nextInt();
-
-       switch (choice) {
-          case 1:
-             System.out.println("Enter your name: ");
-             String name = input.nextLine();
-
-       }
-    }
-	
-=======
-	
 	// constructor
 	public Adult(String _name, int _age, String _gender, String _status) {
 		super(_name, _age, _gender);
@@ -85,6 +43,45 @@ class Adult extends Person {
 		}
 		return false;
 	}
+
+	public void connectPeople(Person a) {
+       Scanner input = new Scanner(System.in);
+
+       System.out.println("\n********************************");
+       System.out.println("* 1. Add a friend                *");
+       System.out.println("* 2. Add a child                 *");
+       System.out.println("* 3. Add a partner               *");
+       System.out.println("* 4. Quit                        *");
+       System.out.println("********************************");
+       System.out.print("Enter an option: ");
+
+       int choice = input.nextInt();
+
+       switch (choice) {
+          case 1:
+             System.out.println("Enter your friend's name: ");
+             String newFriend = input.nextLine();
+             //this.friends.put(a.getName(), a);
+             System.out.println("Friend added successfully!!");
+             break;
+          case 2:
+             System.out.println("Enter your child's name: ");
+             int newChild = input.nextInt();
+             //super.setAge(newAge);
+             System.out.println("Child added successfully!!");
+             break;
+          case 3:
+             System.out.println("Enter your partner's name: ");
+             String newPartner = input.nextLine();
+             //super.setGender(newGender);
+             System.out.println("Partner added successfully!!");
+             break;
+          case 4:
+             return;
+          default:
+             System.out.println("Please input the right option");
+       }
+    }
 
 	public void setStatus(String status) {
 		this.status = status;
@@ -202,9 +199,4 @@ class Adult extends Person {
 		} while (choice == 5);
 
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> a39832e997e5db4ba8586ed4252e12ac4837bcba
->>>>>>> 6b0f89dfbaa10c35382dc107d7626a576b3558a8
 }

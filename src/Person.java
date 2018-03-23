@@ -52,4 +52,6 @@ public abstract class Person {
 
 	public abstract void updateProfile();
 
+   public abstract void connectPeople();
+
 }
