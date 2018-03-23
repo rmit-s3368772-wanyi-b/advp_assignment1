@@ -19,24 +19,41 @@ public class Driver {
 
 	// test cases
 	public void initialiseObj(Map<String, Person> _ppl) {
+		
+		//Initialing some Adults
 		_ppl.put("Adam Lambert", new Adult("Adam Lambert", 27, "Male", "work in KFC"));
 		_ppl.put("Alice", new Adult("Alice", 28, "Female", "CEO"));
-		((Adult) _ppl.get("Alice")).setPartner((Adult) _ppl.get("Adam Lambert"));
 		_ppl.put("Chandler", new Adult("Chandler", 20, "Male", "Student in RMIT"));
 		_ppl.put("Sarah", new Adult("Sarah", 35, "Female", "Writer for Age"));
 		_ppl.put("Bob", new Adult("Bob", 34, "Male", "Tradie by day"));
 		_ppl.put("Peter", new Adult("Peter", 19, "Male", "Driving a taxi"));
 		_ppl.put("Kate", new Adult("Kate", 21, "Female", "Just chilling"));
 
+		//Setting some example partnerships
+		((Adult) _ppl.get("Alice")).setPartner((Adult) _ppl.get("Bob"));
+		((Adult) _ppl.get("Sarah")).setPartner((Adult) _ppl.get("Chandler"));
+		((Adult) _ppl.get("Kate")).setPartner((Adult) _ppl.get("Adam Lambert"));
+		((Adult) _ppl.get("Kate")).setPartner((Adult) _ppl.get("Peter"));
+
+		//Initializing some Teens and Infants
+		_ppl.put("Huani", new Teen ("Huani", 8, "Female", "doing PhD at RMIT",
+				(Adult) this.ppl.get("Chandler")));
+		_ppl.put("Gigi", new Teen ("Gigi", 10, "Female", "studying at a highschool",
+				(Adult) this.ppl.get("Bob")));
+		_ppl.put("Ivan", new Infant("Ivan", 1, "Male", 
+				(Adult) this.ppl.get("Adam Lambert")));
+
+		
+		
+		//Adding friends 
 		((Adult) _ppl.get("Bob")).addFriend((Adult) _ppl.get("Peter"));
 		((Adult) _ppl.get("Bob")).addFriend((Adult) _ppl.get("Alice"));
 		((Adult) _ppl.get("Alice")).addFriend((Adult) _ppl.get("Peter"));
 		((Adult) _ppl.get("Adam Lambert")).addFriend((Adult) _ppl.get("Bob"));
 		((Adult) _ppl.get("Kate")).addFriend((Adult) _ppl.get("Alice"));
+		((Teen) _ppl.get("Huani")).addFriend((Teen) _ppl.get("Gigi"));
+
 		
-		// _ppl.put("Fiona", new Teen("Fiona", 12, "student","Hate maths"));
-		// _ppl.put("Gigi", new Teen("Gigi", 10, "student","Facebooking"));
-		// _ppl.put("Ivan", new Infant("Ivan", 2,));
 	}
 
 	public void runNet() {
@@ -52,7 +69,7 @@ public class Driver {
 				System.out.println(" --> Error: invalid input, no such option.");
 				continue;
 			}
-
+			
 			switch (select) {
 			case 1: // list everyone
 				displayAll();
@@ -68,7 +85,7 @@ public class Driver {
 
 			case 3: // update
 				if (selectPerson()) {
-					this.person.updateProfile();
+					this.person.updateProfile(this.ppl);
 				} else
 					System.out.println(" --> Error: entered NAME does NOT EXIST.");
 
@@ -113,6 +130,7 @@ public class Driver {
 					System.out.println(" --> Error: entered NAME does NOT EXIST.");
 
 				break;
+<<<<<<< HEAD
 
             case 8: // connect two people
                if (selectPerson()) {
@@ -126,6 +144,9 @@ public class Driver {
 				System.out.println("Alice's partner: " + ((Adult) this.ppl.get("Alice")).getPartner().getName());
 				break;
 
+=======
+				
+>>>>>>> 6d77586f386d7d770f2912c413a20d3172b47f94
 			default:
 				break;
 			}
@@ -269,7 +290,7 @@ public class Driver {
 
 		Adult a = verifyMarriedList(parentname);
 
-		Teen teen = new Teen(name, age, gender, status, a, a.getPartner());
+		Teen teen = new Teen(name, age, gender, status, a);
 		this.ppl.put(name, teen);
 		a.setChild(teen);
 		a.getPartner().setChild(teen);
@@ -285,7 +306,7 @@ public class Driver {
 
 		Adult a = verifyMarriedList(parentname);
 
-		Infant infant = new Infant(name, age, gender, a, a.getPartner());
+		Infant infant = new Infant(name, age, gender, a);
 		this.ppl.put(name, infant);
 		a.setChild(infant);
 		a.getPartner().setChild(infant);
