@@ -9,19 +9,19 @@ import java.util.Map.Entry;
 
 class Adult extends Person {
 
-	// variables
+	// Attributes
 	private String status;
 	private Adult partner;
 	private Map<String, Adult> friends = new HashMap<>();
 	private Map<String, Person> children = new HashMap<>();
 
-	// constructor
+	// Constructor
 	public Adult(String _name, int _age, String _gender, String _status) {
 		super(_name, _age, _gender);
 		this.status = _status;
 	}
 
-	// accessor
+	// Accessors
 	public String getStatus() {
 		return this.status;
 	}
@@ -30,12 +30,10 @@ class Adult extends Person {
 		return this.partner;
 	}
 
-	// mutators
-	
-	public boolean addFriend(Person person)
-	{
-		if (person.getAge() > 16)
-		{
+	// Mutators
+
+	public boolean addFriend(Person person) {
+		if (person.getAge() > 16) {
 			this.friends.put(person.getName(), (Adult) person);
 			((Adult) person).friends.put(this.getName(), this);
 			return true;
@@ -48,18 +46,16 @@ class Adult extends Person {
 	}
 
 	public void setPartner(Adult _partner) {
-		//Assumption: no divorce/changing partner allowed
-		if (this.partner != null)
-		{
+		// Assumption: no divorce/changing partner allowed
+		if (this.partner != null) {
 			System.out.println(" -->WARNING: Attempted to SET PARTNER\n"
-							+ "             to a MARRIED person!!!");
+					+ "             to a MARRIED person!!!");
 			return;
 		}
-		
+
 		this.partner = _partner;
 		_partner.partner = this;
 	}
-
 
 	public void setChild(Person a) {
 		this.children.put(a.getName(), a);
@@ -88,15 +84,15 @@ class Adult extends Person {
 		return this.partner.getName();
 	}
 
-	// display family members
+	// display family members (parents/child(ren))
 	public void listFamilyMembers() {
-		
-		if (this.children.size() == 0)
-		{
-			System.out.println(this.getName() + " has no children, unfortunately!");
+
+		if (this.children.size() == 0) {
+			System.out.println(
+					this.getName() + " has no children, unfortunately!");
 			return;
 		}
-		
+
 		// get set of the entries
 		Set set = this.children.entrySet();
 
@@ -128,9 +124,9 @@ class Adult extends Person {
 		}
 	}
 
-	public void updateProfile(Map<String,Person> map) {
+	public void updateProfile(Map<String, Person> map) {
 		int choice = 0;
-		
+
 		do {
 			System.out.println("\n********************************");
 			System.out.println("* 1. Update name               *");
@@ -144,12 +140,12 @@ class Adult extends Person {
 			Scanner input = new Scanner(System.in);
 			choice = input.nextInt();
 			input.nextLine();
-			
+
 			switch (choice) {
 			case 1:
 				System.out.println("Enter new name: ");
 				String newName = input.nextLine();
-				map.put( newName, map.remove(this.getName()) );
+				map.put(newName, map.remove(this.getName()));
 				this.setName(newName);
 				System.out.println("Name updated successfully!!");
 				break;
@@ -179,9 +175,5 @@ class Adult extends Person {
 		} while (choice != 5);
 
 	}
-//<<<<<<< HEAD
-//
-//=======
-//>>>>>>> a39832e997e5db4ba8586ed4252e12ac4837bcba
-//>>>>>>> 6b0f89dfbaa10c35382dc107d7626a576b3558a8
+	
 }

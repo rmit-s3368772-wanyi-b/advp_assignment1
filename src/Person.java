@@ -8,19 +8,19 @@ import java.util.*;
 
 public abstract class Person {
 
-	// variables
+	// Attributes
 	private String name;
 	private int age;
 	private String gender;
 
-	// constructors
+	// Constructors
 	public Person(String _name, int _age, String _gender) {
 		this.name = _name;
 		this.age = _age;
 		this.gender = _gender;
 	}
 
-	// accessors
+	// Accessors
 	public String getName() {
 		return name;
 	}
@@ -33,7 +33,7 @@ public abstract class Person {
 		return gender;
 	}
 
-	// mutators
+	// Mutators
 	public void setName(String _name) {
 		this.name = _name;
 	}
@@ -50,6 +50,6 @@ public abstract class Person {
 
 	public abstract void listFamilyMembers();
 
-	public abstract void updateProfile(Map<String,Person> map);
+	public abstract void updateProfile(Map<String, Person> map);
 
 }
