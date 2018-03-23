@@ -5,7 +5,7 @@ import java.util.*;
  * @author Huani Neupane (s3685849)
  */
 
-class Teen extends Person {
+class Teen extends Person implements Friends{
 
 	// Attributes
 	private String status;

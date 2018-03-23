@@ -149,7 +149,7 @@ public class Driver {
 				break;
 			}
 
-		} while (select != 8);
+		} while (select != 9);
 	}
 
 	public void checkFriends() {
@@ -236,7 +236,8 @@ public class Driver {
 		System.out.println("* 5. Are they friends?         *");
 		System.out.println("* 6. Add a profile             *");
 		System.out.println("* 7. Find out family members   *");
-		System.out.println("* 8. Quit                      *");
+        System.out.println("* 8. Find out family members   *");
+		System.out.println("* 9. Quit                      *");
 		System.out.println("********************************");
 		System.out.print("Enter an option: ");
 	}
@@ -362,7 +363,6 @@ public class Driver {
 		//if person is single
 		return null;
 	}
-
 
 	// 4. Delete profile
 	public void deletePerson() {

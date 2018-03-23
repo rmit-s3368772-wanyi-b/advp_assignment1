@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Class to handle the minimum requirements to create a person.
  * 
- * @author Wan Yi Beh
+ * @author Huani Neupane (s3685849)
  */
 
 public abstract class Person {
@@ -51,5 +51,7 @@ public abstract class Person {
 	public abstract void listFamilyMembers();
 
 	public abstract void updateProfile(Map<String, Person> map);
+
+	public abstract void connectPeople();
 
 }
