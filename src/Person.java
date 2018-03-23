@@ -52,6 +52,4 @@ public abstract class Person {
 
 	public abstract void updateProfile(Map<String, Person> map);
 
-	public abstract void connectPeople();
-
 }
