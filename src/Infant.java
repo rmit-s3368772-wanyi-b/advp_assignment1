@@ -1,22 +1,17 @@
 import java.util.*;
 
 /**
- *
- * @author Huani Neupane (s3685849)
- *
- */
+* Class to handle the requirements to create an Infant.
+*
+* @author  Huani Neupane (s3685849)
+* @version 1.0
+* @since   2018-03-23
+*/
 
 class Infant extends Person {
 
-<<<<<<< HEAD
 	private Map<String, Adult> parents = new HashMap<>();
 
-=======
-	// Attributes
-	private Map<String, Adult> parents = new HashMap<>();
-
-	// Constructor
->>>>>>> d040b8d49809c72f9744d8c25cef00b38dbfb1bf
 	public Infant(String name, int age, String gender, Adult father) {
 		super(name, age, gender);
 		this.parents.put("Father", father);
@@ -25,15 +20,12 @@ class Infant extends Person {
 		father.getPartner().setChild(this);
 	}
 
-<<<<<<< HEAD
 	/**
      * Accessor
      * @return father of Person.
      * @return mother of Person.
      */
-=======
-	// Accessors
->>>>>>> d040b8d49809c72f9744d8c25cef00b38dbfb1bf
+
 	public Adult getFather() {
 		return this.parents.get("Father");
 	}
@@ -42,10 +34,7 @@ class Infant extends Person {
 		return this.parents.get("Mother");
 	}
 
-<<<<<<< HEAD
 	// To display profile of an Infant.
-=======
->>>>>>> d040b8d49809c72f9744d8c25cef00b38dbfb1bf
 	public void displayProfile() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("Age: " + this.getAge());
@@ -60,17 +49,7 @@ class Infant extends Person {
 		System.out.println("- Mother: " + this.parents.get("Mother").getName());
 	}
 
-<<<<<<< HEAD
 	// To update profile of an Infant.
-	public void updateProfile(Map<String,Person> map) {
-		System.out.println("\n********************************");
-		System.out.println("* 1. Update name               *");
-		System.out.println("* 2. Update age                *");
-		System.out.println("* 3. Update gender             *");
-		System.out.println("* 4. Quit                      *");
-		System.out.println("********************************");
-		System.out.print("Enter an option: ");
-=======
 	public void updateProfile(Map<String, Person> map) {
 
 		int choice = 0;
@@ -83,7 +62,6 @@ class Infant extends Person {
 			System.out.println("* 4. Quit                      *");
 			System.out.println("********************************");
 			System.out.print("Enter an option: ");
->>>>>>> d040b8d49809c72f9744d8c25cef00b38dbfb1bf
 
 			Scanner input = new Scanner(System.in);
 			choice = input.nextInt();
