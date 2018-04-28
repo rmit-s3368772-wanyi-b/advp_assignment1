@@ -1,16 +1,17 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
-* The MiniNet program implements an application that
-* that keeps track of information in a simple social network.
-*
-* @author  Wan Yi Beh (S3368772)
-* @version 1.0
-* @since   2018-03-23
-*/
+ * The MiniNet program implements an application that that keeps track of
+ * information in a simple social network.
+ *
+ * @author Wan Yi Beh (S3368772)
+ * @version 1.0
+ * @since 2018-03-23
+ */
 
 public class MiniNet {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws OutOfRangeExe {
 
 		Map<String, Person> ppl = new HashMap<>();
 		Driver d = new Driver(ppl);

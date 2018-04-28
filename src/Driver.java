@@ -61,29 +61,40 @@ public class Driver {
 	/**
 	 * Start run application - MiniNet. Main run loop with one do-while and switch
 	 * cases.
+	 * 
+	 * @throws OutOfRangeExe
 	 */
-	public void runNet() {
+	public void runNet() throws OutOfRangeExe {
 
-		this.initialiseObj(ppl);
-
-		Scanner input = new Scanner(System.in);
+		initialiseObj(ppl);
 
 		do {
 			displayMenu();
-			int select;
-			select = input.nextInt();
-			if (!((Integer) select instanceof Integer) || (select < 1) || (select > 9)) {
-				System.out.println("--> Error: invalid input, no such option.");
-				continue;
-			}
+			int x = 1;
+			int select = 0;
+			do {
+				try {
+					Scanner input = new Scanner(System.in);
+					int inp = input.nextInt();
+					select = inp;
+					if ((select < 1) || (select > 8))
+						throw new OutOfRangeExe("Sorry");
+					x = 2;
+				} catch (OutOfRangeExe ex) {
+					System.out.println(ex);
+					System.out.println("Enter your choice again: ");
+				}
+
+				catch (InputMismatchException e) {
+					System.err.println("Sorry, input needs to be an interger");
+					System.out.println("Enter your choice again: ");
+				}
+
+			} while (x == 1);
 
 			switch (select) {
 			case 1: // list everyone
-				try {
-					displayAll();
-				} catch (InputMismatchException e) {
-					System.out.println("Invalid inout, please enter a number");
-				}
+				displayAll();
 				break;
 
 			case 2: // display profile of a selected person
@@ -155,7 +166,7 @@ public class Driver {
 				break;
 			}
 
-		} while (select == 9);
+		} while (select == 8);
 	}
 
 	/**
@@ -171,8 +182,8 @@ public class Driver {
 		System.out.println("* 5. Are they friends?         *");
 		System.out.println("* 6. Add a profile             *");
 		System.out.println("* 7. Find out family members   *");
-		System.out.println("* 8. Find out family members   *");
-		System.out.println("* 9. Quit                      *");
+
+		System.out.println("* 8. Quit                      *");
 		System.out.println("********************************");
 		System.out.print("Enter an option: ");
 	}
