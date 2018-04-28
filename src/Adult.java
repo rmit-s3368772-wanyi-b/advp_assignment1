@@ -1,15 +1,18 @@
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
-* Class to handle the requirements to create an Adult.
-*
-* @author  Huani Neupane (S3685849)
-* @version 1.0
-* @since   2018-03-23
-*/
+ * Class to handle the requirements to create an Adult.
+ *
+ * @author Huani Neupane (S3685849)
+ * @version 1.0
+ * @since 2018-03-23
+ */
 
-class Adult extends Person implements Friends{
+public class Adult extends Person implements Friends {
 
 	// Attributes
 	private String status;
@@ -24,11 +27,12 @@ class Adult extends Person implements Friends{
 	}
 
 	/**
-     * Accessor
-     * @return status of Adult.
-     * @return father of Adult.
-     * @return mother of Adult.
-     */
+	 * Accessor
+	 * 
+	 * @return status of Adult.
+	 * @return father of Adult.
+	 * @return mother of Adult.
+	 */
 	public String getStatus() {
 		return this.status;
 	}
@@ -38,15 +42,20 @@ class Adult extends Person implements Friends{
 	}
 
 	/**
-     * Mutator
-     * @param status of Adult.
-     * @param child of Adult.
-     * @param partner of Adult.
-     */
+	 * Mutator
+	 * 
+	 * @param status
+	 *            of Adult.
+	 * @param child
+	 *            of Adult.
+	 * @param partner
+	 *            of Adult.
+	 */
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public void setChild(Person a) {
 		this.children.put(a.getName(), a);
 	}
@@ -54,15 +63,13 @@ class Adult extends Person implements Friends{
 	public void setPartner(Adult _partner) {
 		// Assumption: no divorce/changing partner allowed
 		if (this.partner != null) {
-			System.out.println("-->WARNING: Attempted to SET PARTNER\n"
-					+ "             to a MARRIED person!!!");
+			System.out.println("-->WARNING: Attempted to SET PARTNER\n" + "             to a MARRIED person!!!");
 			return;
 		}
 
 		this.partner = _partner;
 		_partner.partner = this;
 	}
-
 
 	// display friend list
 	public void displayFriendList() {
@@ -91,8 +98,7 @@ class Adult extends Person implements Friends{
 	public void listFamilyMembers() {
 
 		if (this.children.size() == 0) {
-			System.out.println(
-					this.getName() + " has no children, unfortunately!");
+			System.out.println(this.getName() + " has no children, unfortunately!");
 			return;
 		}
 
@@ -128,7 +134,7 @@ class Adult extends Person implements Friends{
 		}
 	}
 
-// To update profile of an Adult.
+	// To update profile of an Adult.
 	public void updateProfile(Map<String, Person> map) {
 		int choice = 0;
 
@@ -179,6 +185,12 @@ class Adult extends Person implements Friends{
 			}
 		} while (choice != 5);
 
+	}
+
+	@Override
+	public boolean addFriend(Person person) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
