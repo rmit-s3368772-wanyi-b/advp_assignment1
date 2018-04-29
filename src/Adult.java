@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -136,7 +137,7 @@ public class Adult extends Person implements Friends {
 
 	// To update profile of an Adult.
 	public void updateProfile(Map<String, Person> map) {
-		int choice = 0;
+		int choice;
 
 		do {
 			System.out.println("\n********************************");
@@ -148,12 +149,19 @@ public class Adult extends Person implements Friends {
 			System.out.println("********************************");
 			System.out.print("Enter an option: ");
 
+			choice = 0;
+
 			Scanner input = new Scanner(System.in);
-			choice = input.nextInt();
-			input.nextLine();
+			try {
+				int c = input.nextInt();
+				choice = c;
+			} catch (InputMismatchException e) { // catch if input is not an integer
+				System.err.println("Input needs to be an integer ");
+			}
 
 			switch (choice) {
 			case 1:
+				input.nextLine(); // reading the "enter" from user
 				System.out.println("Enter new name: ");
 				String newName = input.nextLine();
 				map.put(newName, map.remove(this.getName()));
@@ -162,17 +170,27 @@ public class Adult extends Person implements Friends {
 				break;
 			case 2:
 				System.out.println("Enter new age: ");
-				int newAge = input.nextInt();
-				super.setAge(newAge);
-				System.out.println("Age updated successfully!!");
+				try {
+					int newAge = input.nextInt();
+					super.setAge(newAge);
+					System.out.println("Age updated successfully!!");
+				} catch (InputMismatchException e) {
+					System.err.println("Sorry, input needs to be an interger");
+				}
 				break;
 			case 3:
-				System.out.println("Enter new gender: ");
+				input.nextLine(); // read the "enter" from the user in buffer
+				System.out.println("Enter new gender (Male/Female): ");
 				String newGender = input.nextLine();
-				super.setGender(newGender);
-				System.out.println("Gender updated successfully!!");
+				if (newGender.equals("Male") || newGender.equals("Female")) {
+					super.setGender(newGender);
+					System.out.println("Gender updated successfully!!");
+				} else {
+					System.out.println("Sorry, you have input an invalid Gender");
+				}
 				break;
 			case 4:
+				input.nextLine();
 				System.out.println("Enter new status: ");
 				String newStatus = input.nextLine();
 				setStatus(newStatus);
@@ -181,7 +199,7 @@ public class Adult extends Person implements Friends {
 			case 5:
 				return;
 			default:
-				System.out.println("Please input the right option");
+				System.out.println("Please input the right option"); // if input is not within 1-5
 			}
 		} while (choice != 5);
 

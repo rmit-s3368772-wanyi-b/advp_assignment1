@@ -1,14 +1,19 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
-* Class to handle the requirements to create an Teen.
-*
-* @author  Huani Neupane (S3685849)
-* @version 1.0
-* @since   2018-03-23
-*/
+ * Class to handle the requirements to create an Teen.
+ *
+ * @author Huani Neupane (S3685849)
+ * @version 1.0
+ * @since 2018-03-23
+ */
 
-class Teen extends Person implements Friends{
+class Teen extends Person implements Friends {
 
 	// Attributes
 	private String status;
@@ -16,8 +21,7 @@ class Teen extends Person implements Friends{
 	private Map<String, Adult> parents = new HashMap<>();
 
 	// Constructor
-	public Teen(String name, int age, String gender, String _status,
-			Adult father) {
+	public Teen(String name, int age, String gender, String _status, Adult father) {
 		super(name, age, gender);
 		this.status = _status;
 		this.parents.put("Father", father);
@@ -27,11 +31,12 @@ class Teen extends Person implements Friends{
 	}
 
 	/**
-     * Accessor
-     * @return status of Teen.
-     * @return father of Teen.
-     * @return mother of Teen.
-     */
+	 * Accessor
+	 * 
+	 * @return status of Teen.
+	 * @return father of Teen.
+	 * @return mother of Teen.
+	 */
 
 	public String getStatus() {
 		return status;
@@ -46,9 +51,11 @@ class Teen extends Person implements Friends{
 	}
 
 	/**
-     * Mutator
-     * @param status of Teen.
-     */
+	 * Mutator
+	 * 
+	 * @param status
+	 *            of Teen.
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -117,12 +124,19 @@ class Teen extends Person implements Friends{
 			System.out.println("********************************");
 			System.out.print("Enter an option: ");
 
+			choice = 0;
+
 			Scanner input = new Scanner(System.in);
-			choice = input.nextInt();
-			input.nextLine();
+			try {
+				int c = input.nextInt();
+				choice = c;
+			} catch (InputMismatchException e) { // catch if input is not an integer
+				System.err.println("Input needs to be an integer ");
+			}
 
 			switch (choice) {
 			case 1:
+				input.nextLine(); // To read the "enter" from the user
 				System.out.println("Enter new name: ");
 				String newName = input.nextLine();
 				map.put(newName, map.remove(this.getName()));
@@ -131,17 +145,27 @@ class Teen extends Person implements Friends{
 				break;
 			case 2:
 				System.out.println("Enter new age: ");
-				int newAge = input.nextInt();
-				super.setAge(newAge);
-				System.out.println("Age updated successfully!!");
+				try {
+					int newAge = input.nextInt();
+					super.setAge(newAge);
+					System.out.println("Age updated successfully!!");
+				} catch (InputMismatchException e) {
+					System.err.println("Sorry, input needs to be an interger");
+				}
 				break;
 			case 3:
-				System.out.println("Enter new gender: ");
+				input.nextLine();
+				System.out.println("Enter new gender (Male/Female): ");
 				String newGender = input.nextLine();
-				super.setGender(newGender);
-				System.out.println("Gender updated successfully!!");
+				if (newGender.equals("Male") || newGender.equals("Female")) {
+					super.setGender(newGender);
+					System.out.println("Gender updated successfully!!");
+				} else {
+					System.out.println("Sorry, you have input an invalid Gender");
+				}
 				break;
 			case 4:
+				input.nextLine();
 				System.out.println("Enter new status: ");
 				String newStatus = input.nextLine();
 				setStatus(newStatus);

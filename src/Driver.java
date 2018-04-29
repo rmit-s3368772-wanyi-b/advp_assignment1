@@ -60,18 +60,20 @@ public class Driver {
 
 	/**
 	 * Start run application - MiniNet. Main run loop with one do-while and switch
-	 * cases.
+	 * cases with exception handling.
 	 * 
 	 * @throws OutOfRangeExe
 	 */
 	public void runNet() throws OutOfRangeExe {
 
 		initialiseObj(ppl);
+		int select;
 
 		do {
 			displayMenu();
 			int x = 1;
-			int select = 0;
+			select = 0;
+
 			do {
 				try {
 					Scanner input = new Scanner(System.in);
@@ -82,12 +84,12 @@ public class Driver {
 					x = 2;
 				} catch (OutOfRangeExe ex) {
 					System.out.println(ex);
-					System.out.println("Enter your choice again: ");
+					System.out.println("\nEnter your choice again: ");
 				}
 
 				catch (InputMismatchException e) {
-					System.err.println("Sorry, input needs to be an interger");
-					System.out.println("Enter your choice again: ");
+					System.err.print("Sorry, input needs to be an interger\n");
+					System.out.println("\nEnter your choice again: ");
 				}
 
 			} while (x == 1);
@@ -98,25 +100,21 @@ public class Driver {
 				break;
 
 			case 2: // display profile of a selected person
-				try {
-					if (checkPersonInMap()) {
-						this.person.displayProfile();
-					} else
-						System.out.println("--> Error: Entered name does not exist.");
-				} catch (InputMismatchException e) {
-					System.out.println("Invalid input, please ensure no space is entered");
-				}
+
+				if (checkPersonInMap()) {
+					this.person.displayProfile();
+				} else
+					System.out.println("--> Error: Entered name does not exist.");
+
 				break;
 
 			case 3: // update profile of a selected person
-				try {
-					if (checkPersonInMap()) {
-						this.person.updateProfile(this.ppl);
-					} else
-						System.out.println("--> Error: Entered name does not exist.");
-				} catch (InputMismatchException e) {
-					System.out.println("Invaid input, please ensure no space is entered");
-				}
+
+				if (checkPersonInMap()) {
+					this.person.updateProfile(this.ppl);
+				} else
+					System.out.println("--> Error: Entered name does not exist.");
+
 				break;
 
 			case 4: // delete profile of a selected person
@@ -166,7 +164,7 @@ public class Driver {
 				break;
 			}
 
-		} while (select == 8);
+		} while (select != 8);
 	}
 
 	/**
