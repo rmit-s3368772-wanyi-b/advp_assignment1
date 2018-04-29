@@ -1,12 +1,15 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
-* Class to handle the requirements to create an Infant.
-*
-* @author  Huani Neupane (s3685849)
-* @version 1.0
-* @since   2018-03-23
-*/
+ * Class to handle the requirements to create an Infant.
+ *
+ * @author Huani Neupane (s3685849)
+ * @version 1.0
+ * @since 2018-03-23
+ */
 
 class Infant extends Person {
 
@@ -21,10 +24,11 @@ class Infant extends Person {
 	}
 
 	/**
-     * Accessor
-     * @return father of Person.
-     * @return mother of Person.
-     */
+	 * Accessor
+	 * 
+	 * @return father of Person.
+	 * @return mother of Person.
+	 */
 
 	public Adult getFather() {
 		return this.parents.get("Father");
@@ -63,12 +67,19 @@ class Infant extends Person {
 			System.out.println("********************************");
 			System.out.print("Enter an option: ");
 
+			choice = 0;
+
 			Scanner input = new Scanner(System.in);
-			choice = input.nextInt();
-			input.nextLine();
+			try {
+				int c = input.nextInt();
+				choice = c;
+			} catch (InputMismatchException e) { // catch if input is not an integer
+				System.err.println("Input needs to be an integer ");
+			}
 
 			switch (choice) {
 			case 1:
+				input.nextLine(); // to read the "enter" from user
 				System.out.println("Enter new name: ");
 				String newName = input.nextLine();
 				map.put(newName, map.remove(this.getName()));
@@ -77,15 +88,24 @@ class Infant extends Person {
 				break;
 			case 2:
 				System.out.println("Enter new age: ");
-				int newAge = input.nextInt();
-				super.setAge(newAge);
-				System.out.println("Age updated successfully!!");
+				try {
+					int newAge = input.nextInt();
+					super.setAge(newAge);
+					System.out.println("Age updated successfully!!");
+				} catch (InputMismatchException e) {
+					System.err.println("Sorry, input needs to be an interger");
+				}
 				break;
 			case 3:
-				System.out.println("Enter new gender: ");
+				input.nextLine(); // to read the "enter" from user
+				System.out.println("Enter new gender (Male/Female): ");
 				String newGender = input.nextLine();
-				super.setGender(newGender);
-				System.out.println("Gender updated successfully!!");
+				if (newGender.equals("Male") || newGender.equals("Female")) {
+					super.setGender(newGender);
+					System.out.println("Gender updated successfully!!");
+				} else {
+					System.out.println("Sorry, you have input an invalid Gender");
+				}
 				break;
 			case 4:
 				return;
